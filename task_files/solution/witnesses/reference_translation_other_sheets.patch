@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -445,7 +445,8 @@
+@@ -493,7 +493,8 @@
      # Everything that speaks in coordinates is rewritten before the cells move.
      marked = 0
      for ws in wb.worksheets:

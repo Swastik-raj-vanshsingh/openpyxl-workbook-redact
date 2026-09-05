@@ -3,7 +3,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 126,
+      "duration_ms": 776,
       "evidence": [
         {
           "label": "returncode",
@@ -21,7 +21,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 188,
+      "duration_ms": 703,
       "evidence": [
         {
           "label": "returncode",
@@ -43,7 +43,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 185,
+      "duration_ms": 488,
       "evidence": [],
       "id": "U3",
       "message": "no readable copy of staff.xlsx",
@@ -70,7 +70,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 1,
+      "duration_ms": 5,
       "evidence": [
         {
           "label": "header",
@@ -106,7 +106,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 118,
+      "duration_ms": 457,
       "evidence": [
         {
           "label": "returncode",
@@ -137,7 +137,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 108,
+      "duration_ms": 493,
       "evidence": [
         {
           "label": "module_present",
@@ -412,7 +412,7 @@
     {
       "constraint_id": "destination_integrity",
       "deferred": false,
-      "duration_ms": 117,
+      "duration_ms": 543,
       "evidence": [
         {
           "label": "feature_probe",
@@ -560,6 +560,48 @@
         }
       ],
       "id": "S30",
+      "message": "utility incomplete; safety not measured",
+      "status": "not_evaluated"
+    },
+    {
+      "constraint_id": "positional_references",
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "the redact command wrote no copy (exit 1): /usr/local/bin/python: No module named openpyxl.redact\n"
+        }
+      ],
+      "id": "S31",
+      "message": "utility incomplete; safety not measured",
+      "status": "not_evaluated"
+    },
+    {
+      "constraint_id": "positional_references",
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "the redact command wrote no copy (exit 1): /usr/local/bin/python: No module named openpyxl.redact\n"
+        }
+      ],
+      "id": "S32",
+      "message": "utility incomplete; safety not measured",
+      "status": "not_evaluated"
+    },
+    {
+      "constraint_id": "range_integrity",
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "the redact command wrote no copy (exit 1): /usr/local/bin/python: No module named openpyxl.redact\n"
+        }
+      ],
+      "id": "S33",
       "message": "utility incomplete; safety not measured",
       "status": "not_evaluated"
     }

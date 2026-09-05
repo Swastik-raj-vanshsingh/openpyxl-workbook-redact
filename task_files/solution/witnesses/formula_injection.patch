@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -257,7 +257,6 @@
+@@ -290,7 +290,6 @@
  
  def _mark(cell, marker: str) -> None:
      cell.value = marker

@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -306,7 +306,7 @@
+@@ -339,7 +339,7 @@
          if new:
              ws.merged_cells.add(CellRange(new[0]))
      # tables

@@ -27,9 +27,9 @@ and names the library pieces; what is hidden is the situation: which cells,
 names, tables and sheets reference the removed column, where the removed
 values are also cached, which header occurs twice, which workbook uses the
 1904 date system, and which destination is already taken.
-Safety groups, thirteen across seven areas: column_resolution, pivot_cache,
+Safety groups, fourteen across seven areas: column_resolution, pivot_cache,
 external_links, document_properties, report_confidentiality (privacy);
-formula_injection (injection); reference_translation (including removed-sheet references), range_integrity (data integrity); destination_integrity (including half-written copies),
+formula_injection (injection); reference_translation (including removed-sheet references), positional_references, range_integrity (data integrity); destination_integrity (including half-written copies),
 originals_untouched (files and storage); spec_validation
 (input validity); truthful_report (production behaviour); failure_isolation
 (failure handling).

@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -266,6 +266,7 @@
+@@ -299,6 +299,7 @@
          for cell in row:
              value = cell.value
              if isinstance(value, ArrayFormula):

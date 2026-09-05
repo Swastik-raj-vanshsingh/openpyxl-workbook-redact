@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -448,7 +448,7 @@
+@@ -496,7 +496,7 @@
          marked += _rewrite_cells(ws, rewriter, spec.marker)
          _rewrite_sheet_structures(ws, rewriter, maps[ws.title])
      for ws in wb.worksheets:
@@ -8,4 +8,4 @@
 +        for index in maps[ws.title].removed:
              ws.delete_cols(index)
  
-     # The workbook's own record of who made it.
+     # The workbook's own record of who made it, and any other property that

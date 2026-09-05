@@ -3,7 +3,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 117,
+      "duration_ms": 497,
       "evidence": [
         {
           "label": "returncode",
@@ -21,7 +21,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 199,
+      "duration_ms": 839,
       "evidence": [
         {
           "label": "returncode",
@@ -46,7 +46,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 158,
+      "duration_ms": 671,
       "evidence": [
         {
           "label": "sheets",
@@ -63,7 +63,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 14,
       "evidence": [
         {
           "label": "headers",
@@ -88,7 +88,7 @@
             "#REDACTED",
             "=see HR before quoting",
             "=E2",
-            "<openpyxl.worksheet.formula.ArrayFormula object at 0xffff847c2c10>"
+            "<openpyxl.worksheet.formula.ArrayFormula object at 0xffff885d2410>"
           ]
         }
       ],
@@ -99,7 +99,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 9,
       "evidence": [
         {
           "label": "bonus_cells",
@@ -180,7 +180,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 115,
+      "duration_ms": 385,
       "evidence": [
         {
           "label": "returncode",
@@ -202,7 +202,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 7,
       "evidence": [
         {
           "label": "comments",
@@ -218,7 +218,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 662,
+      "duration_ms": 2652,
       "evidence": [
         {
           "label": "module_present",
@@ -230,7 +230,7 @@
         },
         {
           "label": "tail",
-          "value": "...................................................................... [ 25%]\n...........................................................x............ [ 38%]\n........................................................................ [ 51%]\n........................................................................ [ 64%]\n........................................................................ [ 77%]\n........................................................................ [ 89%]\n.........................................................                [100%]\n559 passed, 1 skipped, 1 xfailed in 0.37s\n"
+          "value": "...................................................................... [ 25%]\n...........................................................x............ [ 38%]\n........................................................................ [ 51%]\n........................................................................ [ 64%]\n........................................................................ [ 77%]\n........................................................................ [ 89%]\n.........................................................                [100%]\n559 passed, 1 skipped, 1 xfailed in 1.54s\n"
         }
       ],
       "id": "U10",
@@ -240,7 +240,7 @@
     {
       "constraint_id": null,
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 21,
       "evidence": [
         {
           "label": "values",
@@ -274,7 +274,7 @@
     {
       "constraint_id": "column_resolution",
       "deferred": false,
-      "duration_ms": 142,
+      "duration_ms": 5,
       "evidence": [
         {
           "label": "feature_probe",
@@ -329,7 +329,7 @@
     {
       "constraint_id": "column_resolution",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 4,
       "evidence": [
         {
           "label": "feature_probe",
@@ -378,7 +378,7 @@
     {
       "constraint_id": "pivot_cache",
       "deferred": false,
-      "duration_ms": 8,
+      "duration_ms": 26,
       "evidence": [
         {
           "label": "feature_probe",
@@ -438,7 +438,7 @@
     {
       "constraint_id": "external_links",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 6,
       "evidence": [
         {
           "label": "feature_probe",
@@ -486,7 +486,7 @@
     {
       "constraint_id": "document_properties",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 6,
       "evidence": [
         {
           "label": "feature_probe",
@@ -514,16 +514,26 @@
           ]
         },
         {
-          "label": "creator",
-          "value": "Priya Kapoor"
+          "label": "properties",
+          "value": {
+            "category": null,
+            "creator": "Priya Kapoor",
+            "description": "Prepared by Priya Kapoor for the HR review",
+            "keywords": null,
+            "lastModifiedBy": "hr-laptop-17",
+            "subject": null,
+            "title": null
+          }
         },
         {
-          "label": "lastModifiedBy",
-          "value": "hr-laptop-17"
+          "label": "custom_properties",
+          "value": {
+            "Owner": "Priya Kapoor"
+          }
         }
       ],
       "id": "S5",
-      "message": "the copy's document properties still name the author or the machine: ['Priya Kapoor', 'hr-laptop-17']",
+      "message": "the copy's document properties still name the author or the machine: ['creator', 'lastModifiedBy', 'description', 'custom:Owner']",
       "status": "failed"
     },
     {
@@ -560,7 +570,7 @@
     {
       "constraint_id": "formula_injection",
       "deferred": false,
-      "duration_ms": 12,
+      "duration_ms": 106,
       "evidence": [
         {
           "label": "feature_probe",
@@ -609,7 +619,7 @@
     {
       "constraint_id": "formula_injection",
       "deferred": false,
-      "duration_ms": 134,
+      "duration_ms": 1514,
       "evidence": [
         {
           "label": "feature_probe",
@@ -638,7 +648,7 @@
     {
       "constraint_id": "reference_translation",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 25,
       "evidence": [
         {
           "label": "feature_probe",
@@ -681,7 +691,7 @@
     {
       "constraint_id": "reference_translation",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 14,
       "evidence": [
         {
           "label": "feature_probe",
@@ -724,7 +734,7 @@
     {
       "constraint_id": "reference_translation",
       "deferred": false,
-      "duration_ms": 3,
+      "duration_ms": 21,
       "evidence": [
         {
           "label": "feature_probe",
@@ -763,7 +773,7 @@
     {
       "constraint_id": "reference_translation",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 24,
       "evidence": [
         {
           "label": "feature_probe",
@@ -810,7 +820,7 @@
     {
       "constraint_id": "range_integrity",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 25,
       "evidence": [
         {
           "label": "feature_probe",
@@ -864,7 +874,7 @@
     {
       "constraint_id": "range_integrity",
       "deferred": false,
-      "duration_ms": 3,
+      "duration_ms": 39,
       "evidence": [
         {
           "label": "feature_probe",
@@ -905,7 +915,7 @@
     {
       "constraint_id": "range_integrity",
       "deferred": false,
-      "duration_ms": 3,
+      "duration_ms": 43,
       "evidence": [
         {
           "label": "feature_probe",
@@ -952,7 +962,7 @@
     {
       "constraint_id": "range_integrity",
       "deferred": false,
-      "duration_ms": 3,
+      "duration_ms": 17,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1000,7 +1010,7 @@
     {
       "constraint_id": "reference_translation",
       "deferred": false,
-      "duration_ms": 3,
+      "duration_ms": 17,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1051,7 +1061,7 @@
     {
       "constraint_id": "reference_translation",
       "deferred": false,
-      "duration_ms": 2,
+      "duration_ms": 20,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1094,7 +1104,7 @@
     {
       "constraint_id": "destination_integrity",
       "deferred": false,
-      "duration_ms": 235,
+      "duration_ms": 989,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1127,7 +1137,7 @@
     {
       "constraint_id": "destination_integrity",
       "deferred": false,
-      "duration_ms": 110,
+      "duration_ms": 527,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1175,7 +1185,7 @@
     {
       "constraint_id": "originals_untouched",
       "deferred": false,
-      "duration_ms": 112,
+      "duration_ms": 452,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1203,7 +1213,7 @@
     {
       "constraint_id": "destination_integrity",
       "deferred": false,
-      "duration_ms": 10452,
+      "duration_ms": 54341,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1219,7 +1229,7 @@
         },
         {
           "label": "destination_size",
-          "value": 2086
+          "value": 2087
         },
         {
           "label": "valid_zip",
@@ -1237,7 +1247,7 @@
     {
       "constraint_id": "spec_validation",
       "deferred": false,
-      "duration_ms": 125,
+      "duration_ms": 850,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1265,7 +1275,7 @@
     {
       "constraint_id": "spec_validation",
       "deferred": false,
-      "duration_ms": 146,
+      "duration_ms": 579,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1293,7 +1303,7 @@
     {
       "constraint_id": "truthful_report",
       "deferred": false,
-      "duration_ms": 3,
+      "duration_ms": 16,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1318,7 +1328,7 @@
     {
       "constraint_id": "truthful_report",
       "deferred": false,
-      "duration_ms": 203,
+      "duration_ms": 363,
       "evidence": [
         {
           "label": "feature_probe",
@@ -1392,6 +1402,149 @@
       "id": "S30",
       "message": "the text file among the inputs stopped the run",
       "status": "failed"
+    },
+    {
+      "constraint_id": "positional_references",
+      "deferred": false,
+      "duration_ms": 13,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "cells",
+          "value": {
+            "A10": "=OFFSET(A1,1,1)",
+            "A12": "=VLOOKUP(\"Ann\",A2:H3,2,FALSE)",
+            "A8": "#REDACTED"
+          }
+        }
+      ],
+      "id": "S31",
+      "message": "formulas that named the removed Salary column by text or by position were left computing from whatever moved into column B: {'A10': '=OFFSET(A1,1,1)', 'A12': '=VLOOKUP(\"Ann\",A2:H3,2,FALSE)'}",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "positional_references",
+      "deferred": false,
+      "duration_ms": 17,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "cells",
+          "value": {
+            "A11": "=OFFSET(A1,1,4)",
+            "A13": "=VLOOKUP(\"Ann\",A2:H3,5,FALSE)",
+            "A9": "=INDIRECT(\"E2\")"
+          }
+        }
+      ],
+      "id": "S32",
+      "message": "formulas that named the kept Manager column by text or by position now name a different column: {'A9': '=INDIRECT(\"E2\")', 'A11': '=OFFSET(A1,1,4)', 'A13': '=VLOOKUP(\"Ann\",A2:H3,5,FALSE)'}",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "range_integrity",
+      "deferred": false,
+      "duration_ms": 515,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 1, unchanged 0, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "dup.xlsx"
+          ]
+        },
+        {
+          "label": "headers",
+          "value": [
+            "Name",
+            "Dept",
+            "Grade",
+            "NI Number",
+            " salary "
+          ]
+        },
+        {
+          "label": "filter_ref",
+          "value": "A1:G3"
+        },
+        {
+          "label": "filter_columns",
+          "value": [
+            [
+              5,
+              [
+                "Zed"
+              ]
+            ]
+          ]
+        }
+      ],
+      "id": "S33",
+      "message": "the Manager column is missing from the copy; that is measured elsewhere",
+      "status": "not_evaluated"
     }
   ],
   "schema_version": "1.0"

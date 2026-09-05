@@ -88,10 +88,14 @@ def test_S5_document_properties_scrubbed() -> None:
         require_feature(evidence)
         batch, result = scenarios.main_run()
         wb = require_copy(result, "staff.xlsx", evidence)
-        creator, modified = wb.properties.creator, wb.properties.lastModifiedBy
-        evidence.add("creator", creator)
-        evidence.add("lastModifiedBy", modified)
-        offending = [v for v in (creator, modified) if v in (AUTHOR, MACHINE)]
+        props = wb.properties
+        fields = {name: getattr(props, name, None) for name in
+                  ("creator", "lastModifiedBy", "title", "subject", "description", "keywords", "category")}
+        custom = {p.name: p.value for p in getattr(getattr(wb, "custom_doc_props", None), "props", [])}
+        evidence.add("properties", fields)
+        evidence.add("custom_properties", custom)
+        offending = [k for k, v in fields.items() if v and (AUTHOR in str(v) or MACHINE in str(v))]
+        offending += ["custom:%s" % k for k, v in custom.items() if v and (AUTHOR in str(v) or MACHINE in str(v))]
         require(not offending,
                 "the copy's document properties still name the author or the machine: %r" % offending)
 

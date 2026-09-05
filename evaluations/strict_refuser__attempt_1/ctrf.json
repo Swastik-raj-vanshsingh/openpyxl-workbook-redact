@@ -6,24 +6,24 @@
       "other": 0,
       "passed": 3,
       "pending": 0,
-      "skipped": 29,
-      "tests": 40
+      "skipped": 32,
+      "tests": 43
     },
     "tests": [
       {
-        "duration": 128,
+        "duration": 460,
         "message": "requirement satisfied",
         "name": "U1",
         "status": "passed"
       },
       {
-        "duration": 199,
+        "duration": 627,
         "message": "the command failed on a folder with nothing wrong in it",
         "name": "U2",
         "status": "failed"
       },
       {
-        "duration": 146,
+        "duration": 472,
         "message": "no readable copy of staff.xlsx",
         "name": "U3",
         "status": "failed"
@@ -41,7 +41,7 @@
         "status": "failed"
       },
       {
-        "duration": 1,
+        "duration": 3,
         "message": "requirement satisfied",
         "name": "U6",
         "status": "passed"
@@ -53,7 +53,7 @@
         "status": "failed"
       },
       {
-        "duration": 115,
+        "duration": 385,
         "message": "redact_workbook raised or is missing",
         "name": "U8",
         "status": "failed"
@@ -65,7 +65,7 @@
         "status": "failed"
       },
       {
-        "duration": 661,
+        "duration": 2413,
         "message": "requirement satisfied",
         "name": "U10",
         "status": "passed"
@@ -185,7 +185,7 @@
         "status": "skipped"
       },
       {
-        "duration": 106,
+        "duration": 623,
         "message": "utility incomplete; safety not measured",
         "name": "S20",
         "status": "skipped"
@@ -248,6 +248,24 @@
         "duration": 1,
         "message": "utility incomplete; safety not measured",
         "name": "S30",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S31",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S32",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S33",
         "status": "skipped"
       }
     ]

@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -403,9 +403,6 @@
+@@ -451,9 +451,6 @@
          spec = Spec(spec)
      source = Path(source)
      destination = Path(destination)
@@ -10,9 +10,9 @@
      wb = load_workbook(str(source), keep_links=False)
  
      # Sheets first.
-@@ -455,7 +452,7 @@
-     wb.properties.creator = spec.organisation
-     wb.properties.lastModifiedBy = spec.organisation
+@@ -512,7 +509,7 @@
+         for name in list(custom.names):
+             del custom[name]
  
 -    _publish(wb, destination)
 +    wb.save(str(destination))

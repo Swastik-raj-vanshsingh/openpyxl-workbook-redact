@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -419,7 +419,7 @@
+@@ -467,7 +467,7 @@
  
      # Which columns go, per remaining sheet.
      maps = {ws.title: ColumnMap(_header_indices(ws, spec.drop_columns)) for ws in wb.worksheets}

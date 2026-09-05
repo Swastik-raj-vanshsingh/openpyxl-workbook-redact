@@ -1,0 +1,13 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -227,9 +227,7 @@
+         tokenizer = Tokenizer(text)
+         functions = {token.value.rstrip("(").upper() for token in tokenizer.items
+                      if token.type == Token.FUNC and token.subtype == Token.OPEN}
+-        if functions & OPAQUE_FUNCTIONS:
+-            raise self.Dependent()  # its targets are text; nothing here can prove them safe
+-        positional = bool(functions & POSITIONAL_FUNCTIONS)
++        positional = False
+         out = []
+         for token in tokenizer.items:
+             if token.type == Token.OPERAND and token.subtype == Token.RANGE:

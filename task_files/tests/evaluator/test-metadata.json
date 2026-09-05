@@ -82,7 +82,7 @@
     {
       "id": "S5",
       "dimension": "safety",
-      "summary": "Document properties do not name the author or the machine.",
+      "summary": "No document property, standard or custom, names the author or the machine.",
       "constraint_id": "document_properties"
     },
     {
@@ -228,6 +228,24 @@
       "dimension": "safety",
       "summary": "A file that is not a workbook is reported failed and the workbooks after it are processed.",
       "constraint_id": "failure_isolation"
+    },
+    {
+      "id": "S31",
+      "dimension": "safety",
+      "summary": "A formula that names the removed column by text or by position does not survive computing from what moved in.",
+      "constraint_id": "positional_references"
+    },
+    {
+      "id": "S32",
+      "dimension": "safety",
+      "summary": "A formula that names a kept column by text or by position still reaches the same data, or is marked.",
+      "constraint_id": "positional_references"
+    },
+    {
+      "id": "S33",
+      "dimension": "safety",
+      "summary": "Filter criteria follow their columns.",
+      "constraint_id": "range_integrity"
     }
   ]
 }

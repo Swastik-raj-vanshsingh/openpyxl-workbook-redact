@@ -33,6 +33,7 @@
     "formula_injection",
     "originals_untouched",
     "pivot_cache",
+    "positional_references",
     "range_integrity",
     "reference_translation",
     "report_confidentiality",

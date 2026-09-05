@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -252,6 +252,7 @@
+@@ -285,6 +285,7 @@
      for cell in ws[1]:
          if _normalise(cell.value) in wanted and cell.value is not None:
              found.append(cell.column)

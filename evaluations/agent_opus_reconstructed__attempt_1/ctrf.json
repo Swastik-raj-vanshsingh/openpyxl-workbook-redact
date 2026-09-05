@@ -1,0 +1,273 @@
+{
+  "reportFormat": "CTRF",
+  "results": {
+    "summary": {
+      "failed": 3,
+      "other": 0,
+      "passed": 40,
+      "pending": 0,
+      "skipped": 0,
+      "tests": 43
+    },
+    "tests": [
+      {
+        "duration": 606,
+        "message": "requirement satisfied",
+        "name": "U1",
+        "status": "passed"
+      },
+      {
+        "duration": 902,
+        "message": "requirement satisfied",
+        "name": "U2",
+        "status": "passed"
+      },
+      {
+        "duration": 689,
+        "message": "requirement satisfied",
+        "name": "U3",
+        "status": "passed"
+      },
+      {
+        "duration": 7,
+        "message": "requirement satisfied",
+        "name": "U4",
+        "status": "passed"
+      },
+      {
+        "duration": 6,
+        "message": "requirement satisfied",
+        "name": "U5",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "U6",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "U7",
+        "status": "passed"
+      },
+      {
+        "duration": 397,
+        "message": "requirement satisfied",
+        "name": "U8",
+        "status": "passed"
+      },
+      {
+        "duration": 6,
+        "message": "requirement satisfied",
+        "name": "U9",
+        "status": "passed"
+      },
+      {
+        "duration": 2394,
+        "message": "requirement satisfied",
+        "name": "U10",
+        "status": "passed"
+      },
+      {
+        "duration": 11,
+        "message": "requirement satisfied",
+        "name": "U11",
+        "status": "passed"
+      },
+      {
+        "duration": 6,
+        "message": "requirement satisfied",
+        "name": "S1",
+        "status": "passed"
+      },
+      {
+        "duration": 6,
+        "message": "requirement satisfied",
+        "name": "S2",
+        "status": "passed"
+      },
+      {
+        "duration": 13,
+        "message": "requirement satisfied",
+        "name": "S3",
+        "status": "passed"
+      },
+      {
+        "duration": 14,
+        "message": "requirement satisfied",
+        "name": "S4",
+        "status": "passed"
+      },
+      {
+        "duration": 13,
+        "message": "requirement satisfied",
+        "name": "S5",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "S6",
+        "status": "passed"
+      },
+      {
+        "duration": 10,
+        "message": "requirement satisfied",
+        "name": "S7",
+        "status": "passed"
+      },
+      {
+        "duration": 398,
+        "message": "requirement satisfied",
+        "name": "S8",
+        "status": "passed"
+      },
+      {
+        "duration": 8,
+        "message": "requirement satisfied",
+        "name": "S9",
+        "status": "passed"
+      },
+      {
+        "duration": 9,
+        "message": "requirement satisfied",
+        "name": "S10",
+        "status": "passed"
+      },
+      {
+        "duration": 7,
+        "message": "requirement satisfied",
+        "name": "S11",
+        "status": "passed"
+      },
+      {
+        "duration": 7,
+        "message": "requirement satisfied",
+        "name": "S12",
+        "status": "passed"
+      },
+      {
+        "duration": 7,
+        "message": "requirement satisfied",
+        "name": "S13",
+        "status": "passed"
+      },
+      {
+        "duration": 5,
+        "message": "requirement satisfied",
+        "name": "S14",
+        "status": "passed"
+      },
+      {
+        "duration": 7,
+        "message": "requirement satisfied",
+        "name": "S15",
+        "status": "passed"
+      },
+      {
+        "duration": 8,
+        "message": "requirement satisfied",
+        "name": "S16",
+        "status": "passed"
+      },
+      {
+        "duration": 8,
+        "message": "requirement satisfied",
+        "name": "S17",
+        "status": "passed"
+      },
+      {
+        "duration": 8,
+        "message": "requirement satisfied",
+        "name": "S19",
+        "status": "passed"
+      },
+      {
+        "duration": 941,
+        "message": "requirement satisfied",
+        "name": "S20",
+        "status": "passed"
+      },
+      {
+        "duration": 471,
+        "message": "requirement satisfied",
+        "name": "S21",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S22",
+        "status": "passed"
+      },
+      {
+        "duration": 386,
+        "message": "requirement satisfied",
+        "name": "S23",
+        "status": "passed"
+      },
+      {
+        "duration": 47025,
+        "message": "requirement satisfied",
+        "name": "S24",
+        "status": "passed"
+      },
+      {
+        "duration": 295,
+        "message": "requirement satisfied",
+        "name": "S25",
+        "status": "passed"
+      },
+      {
+        "duration": 283,
+        "message": "requirement satisfied",
+        "name": "S26",
+        "status": "passed"
+      },
+      {
+        "duration": 10,
+        "message": "requirement satisfied",
+        "name": "S27",
+        "status": "passed"
+      },
+      {
+        "duration": 403,
+        "message": "requirement satisfied",
+        "name": "S28",
+        "status": "passed"
+      },
+      {
+        "duration": 14,
+        "message": "requirement satisfied",
+        "name": "S29",
+        "status": "passed"
+      },
+      {
+        "duration": 7,
+        "message": "the file that is not a workbook is not reported as failed",
+        "name": "S30",
+        "status": "failed"
+      },
+      {
+        "duration": 9,
+        "message": "formulas that named the removed Salary column by text or by position were left computing from whatever moved into column B: {'A8': '=INDIRECT(\"B2\")', 'A10': '=OFFSET(A1,1,1)'}",
+        "name": "S31",
+        "status": "failed"
+      },
+      {
+        "duration": 7,
+        "message": "formulas that named the kept Manager column by text or by position now name a different column: {'A9': '=INDIRECT(\"E2\")', 'A11': '=OFFSET(A1,1,4)'}",
+        "name": "S32",
+        "status": "failed"
+      },
+      {
+        "duration": 341,
+        "message": "requirement satisfied",
+        "name": "S33",
+        "status": "passed"
+      }
+    ]
+  }
+}

@@ -1,9 +1,9 @@
 diff --git a/openpyxl/redact.py b/openpyxl/redact.py
 new file mode 100644
-index 0000000..e65a33a
+index 0000000..e33297c
 --- /dev/null
 +++ b/openpyxl/redact.py
-@@ -0,0 +1,580 @@
+@@ -0,0 +1,637 @@
 +# Copyright (c) 2010-2024 openpyxl
 +
 +"""Produce a copy of a workbook with named sheets and columns removed.
@@ -145,6 +145,15 @@ index 0000000..e65a33a
 +    return name
 +
 +
++# Functions that address cells by text or by position rather than by reference.
++# A tokenizer cannot see through them: INDIRECT("B2") names the removed column
++# in a string, and VLOOKUP(..., 2, ...) names it by its place in a range that is
++# about to lose a column. The first kind cannot be checked at all; the second
++# kind is checked against the ranges the formula does name.
++OPAQUE_FUNCTIONS = {"INDIRECT", "OFFSET", "ADDRESS"}
++POSITIONAL_FUNCTIONS = {"VLOOKUP", "HLOOKUP", "INDEX", "MATCH", "LOOKUP", "CHOOSE", "COLUMN", "COLUMNS"}
++
++
 +class Rewriter:
 +    """Rewrites references for the new layout, or says a reference is dependent."""
 +
@@ -222,14 +231,38 @@ index 0000000..e65a33a
 +        """Rewrite a whole formula; raise Dependent if any reference used removed data."""
 +        text = formula if formula.startswith("=") else "=" + formula
 +        tokenizer = Tokenizer(text)
++        functions = {token.value.rstrip("(").upper() for token in tokenizer.items
++                     if token.type == Token.FUNC and token.subtype == Token.OPEN}
++        if functions & OPAQUE_FUNCTIONS:
++            raise self.Dependent()  # its targets are text; nothing here can prove them safe
++        positional = bool(functions & POSITIONAL_FUNCTIONS)
 +        out = []
 +        for token in tokenizer.items:
 +            if token.type == Token.OPERAND and token.subtype == Token.RANGE:
++                if positional and self._spans_removed(token.value, own_sheet):
++                    raise self.Dependent()  # a column number inside this range just changed meaning
 +                out.append(self.reference(token.value, own_sheet))
 +            else:
 +                out.append(token.value)
 +        rebuilt = "=" + "".join(out)
 +        return rebuilt if formula.startswith("=") else rebuilt[1:]
++
++    def _spans_removed(self, text: str, own_sheet: str) -> bool:
++        """Does a range reference cover any removed column of its sheet?"""
++        match = _REF.match(text)
++        if not match or match.group("b") is None:
++            return False
++        sheet = _split_sheet(match.group("sheet"))
++        cmap = self.maps.get(sheet if sheet is not None else own_sheet)
++        if cmap is None or not cmap.removed:
++            return False
++        a, b = match.group("a"), match.group("b")
++        ca, cb = _CELL.match(a) or _COL.match(a), _CELL.match(b) or _COL.match(b)
++        if not ca or not cb:
++            return False
++        ia = column_index_from_string(ca.group(2).upper())
++        ib = column_index_from_string(cb.group(2).upper())
++        return cmap.touches(min(ia, ib), max(ia, ib))
 +
 +    def sqref(self, ranges: Iterable[str], sheet: str) -> list[str]:
 +        """Shift a list of cell ranges on one sheet; drop those wholly removed."""
@@ -325,10 +358,21 @@ index 0000000..e65a33a
 +        table.ref = str(CellRange(min_col=span[0], min_row=min_row, max_col=span[1], max_row=max_row))
 +        if table.autoFilter is not None:
 +            table.autoFilter.ref = table.ref
-+    # sheet filter
++    # sheet filter: its range shrinks and its per-column criteria move with their columns
 +    if ws.auto_filter.ref:
++        min_col, _, _, _ = range_boundaries(ws.auto_filter.ref)
 +        new = rewriter.sqref([ws.auto_filter.ref], title)
++        kept_filters = []
++        for column in list(ws.auto_filter.filterColumn):
++            original = min_col + int(column.colId)
++            if cmap.is_removed(original):
++                continue
++            column.colId = cmap.shift(original) - (cmap.shift(min_col) if not cmap.is_removed(min_col) else cmap.shift_range(min_col, min_col + 1)[0])
++            kept_filters.append(column)
++        ws.auto_filter.filterColumn = kept_filters
 +        ws.auto_filter.ref = new[0] if new else None
++        if not new:
++            ws.auto_filter.filterColumn = []
 +    # conditional formatting
 +    rebuilt = ConditionalFormattingList()
 +    for cf in ws.conditional_formatting:
@@ -358,6 +402,10 @@ index 0000000..e65a33a
 +        dv.sqref = " ".join(ranges)
 +        kept.append(dv)
 +    ws.data_validations.dataValidation = kept
++    # the frozen pane follows its column
++    if ws.freeze_panes:
++        new = rewriter.sqref([ws.freeze_panes], title)
++        ws.freeze_panes = new[0] if new else None
 +    # column widths and hidden flags move with their columns
 +    dims = {}
 +    for letter, dim in list(ws.column_dimensions.items()):
@@ -457,9 +505,18 @@ index 0000000..e65a33a
 +        for index in reversed(maps[ws.title].removed):
 +            ws.delete_cols(index)
 +
-+    # The workbook's own record of who made it.
++    # The workbook's own record of who made it, and any other property that
++    # can carry a name: title, subject, description, keywords, category, and
++    # the custom properties a department adds by hand.
 +    wb.properties.creator = spec.organisation
 +    wb.properties.lastModifiedBy = spec.organisation
++    for attribute in ("title", "subject", "description", "keywords", "category"):
++        if getattr(wb.properties, attribute, None):
++            setattr(wb.properties, attribute, None)
++    custom = getattr(wb, "custom_doc_props", None)
++    if custom is not None:
++        for name in list(custom.names):
++            del custom[name]
 +
 +    _publish(wb, destination)
 +    return {

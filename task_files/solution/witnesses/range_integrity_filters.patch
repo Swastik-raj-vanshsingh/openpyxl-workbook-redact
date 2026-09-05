@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -361,7 +361,7 @@
+             original = min_col + int(column.colId)
+             if cmap.is_removed(original):
+                 continue
+-            column.colId = cmap.shift(original) - (cmap.shift(min_col) if not cmap.is_removed(min_col) else cmap.shift_range(min_col, min_col + 1)[0])
++            pass
+             kept_filters.append(column)
+         ws.auto_filter.filterColumn = kept_filters
+         ws.auto_filter.ref = new[0] if new else None

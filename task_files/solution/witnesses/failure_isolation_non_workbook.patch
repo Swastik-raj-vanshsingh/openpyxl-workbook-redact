@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -523,11 +523,6 @@
+@@ -580,11 +580,6 @@
      redacted = unchanged = failed = 0
      for path in sorted(p for p in source_root.iterdir() if p.is_file()):
          if not _is_workbook_candidate(path):

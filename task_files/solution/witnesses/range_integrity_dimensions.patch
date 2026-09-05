@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -366,9 +366,6 @@
+@@ -414,9 +414,6 @@
          moved.index = get_column_letter(new_index)
          moved.min = moved.max = new_index
          dims[moved.index] = moved

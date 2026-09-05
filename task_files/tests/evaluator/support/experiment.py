@@ -69,8 +69,9 @@ def _openpyxl():
     from openpyxl.styles import PatternFill
     from openpyxl.worksheet.formula import ArrayFormula
     from openpyxl.utils.datetime import CALENDAR_MAC_1904
+    from openpyxl.packaging.custom import StringProperty
 
-    return dict(Workbook=Workbook, load_workbook=load_workbook, Comment=Comment,
+    return dict(StringProperty=StringProperty, Workbook=Workbook, load_workbook=load_workbook, Comment=Comment,
                 DefinedName=DefinedName, Table=Table, DataValidation=DataValidation,
                 CellIsRule=CellIsRule, PatternFill=PatternFill, ArrayFormula=ArrayFormula,
                 CALENDAR_MAC_1904=CALENDAR_MAC_1904)
@@ -120,6 +121,13 @@ class Batch:
             ws["B4"] = "=SUM(B2:B3)"          # depends on removed data
             ws["H4"] = "=COUNTA(E2:E3)"       # depends on kept data to the right of the removed column
             ws["I2"] = o["ArrayFormula"]("I2:I3", "=E2:E3")  # an array formula over kept data
+            # formulas that name a column by text or by position rather than by reference
+            ws["A8"] = '=INDIRECT("B2")'                 # the removed column, spelt as text
+            ws["A9"] = '=INDIRECT("E2")'                 # a kept column, spelt as text
+            ws["A10"] = "=OFFSET(A1,1,1)"                # the removed column, by position
+            ws["A11"] = "=OFFSET(A1,1,4)"                # a kept column, by position
+            ws["A12"] = '=VLOOKUP("Ann",A2:H3,2,FALSE)'  # column 2 of a range that loses column 2
+            ws["A13"] = '=VLOOKUP("Ann",A2:H3,5,FALSE)'  # column 5 of a range that loses a column before it
             ws.merge_cells("A6:H6"); ws["A6"] = "Confidential - HR use"
             ws.add_table(o["Table"](displayName="StaffTable", ref="A1:H3"))
             dv = o["DataValidation"](type="whole", operator="greaterThan", formula1="0")
@@ -144,6 +152,8 @@ class Batch:
             n = wb.create_sheet("Notes"); n["A1"] = NOTES_TEXT
             wb.properties.creator = AUTHOR
             wb.properties.lastModifiedBy = MACHINE
+            wb.properties.description = "Prepared by %s for the HR review" % AUTHOR
+            wb.custom_doc_props.append(o["StringProperty"](name="Owner", value=AUTHOR))
             write(wb, "staff.xlsx", "staff")
 
         if dup:
@@ -152,6 +162,8 @@ class Batch:
             ws.append(["Name", "Salary", "Dept", "Grade", "NI Number", "Manager", " salary "])
             ws.append(["Cara", SALARY_A, "Ops", "A", NI_DUP, "Zed", SALARY_DUP])
             ws.append(["Dev", SALARY_B, "Eng", "B", NI_B, "Yara", SALARY_DUP + 1])
+            ws.auto_filter.ref = "A1:G3"
+            ws.auto_filter.add_filter_column(5, ["Zed"])   # a criterion on the Manager column
             write(wb, "dup.xlsx", "dup")
 
         if dates1904:

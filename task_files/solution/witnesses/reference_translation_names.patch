@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -438,9 +438,6 @@
+@@ -486,9 +486,6 @@
          except Rewriter.Dependent:
              dropped_names.add(name)
      rewriter = Rewriter(maps, removed_sheets, dropped_names)

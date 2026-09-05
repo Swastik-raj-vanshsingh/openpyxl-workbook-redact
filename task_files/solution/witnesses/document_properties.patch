@@ -1,11 +1,11 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -452,8 +452,6 @@
-             ws.delete_cols(index)
- 
-     # The workbook's own record of who made it.
+@@ -502,8 +502,6 @@
+     # The workbook's own record of who made it, and any other property that
+     # can carry a name: title, subject, description, keywords, category, and
+     # the custom properties a department adds by hand.
 -    wb.properties.creator = spec.organisation
 -    wb.properties.lastModifiedBy = spec.organisation
- 
-     _publish(wb, destination)
-     return {
+     for attribute in ("title", "subject", "description", "keywords", "category"):
+         if getattr(wb.properties, attribute, None):
+             setattr(wb.properties, attribute, None)

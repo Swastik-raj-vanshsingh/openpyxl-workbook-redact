@@ -6,24 +6,24 @@
       "other": 0,
       "passed": 0,
       "pending": 0,
-      "skipped": 29,
-      "tests": 40
+      "skipped": 32,
+      "tests": 43
     },
     "tests": [
       {
-        "duration": 126,
+        "duration": 776,
         "message": "python -m openpyxl.redact --help did not succeed",
         "name": "U1",
         "status": "failed"
       },
       {
-        "duration": 188,
+        "duration": 703,
         "message": "the command failed on a folder with nothing wrong in it",
         "name": "U2",
         "status": "failed"
       },
       {
-        "duration": 185,
+        "duration": 488,
         "message": "no readable copy of staff.xlsx",
         "name": "U3",
         "status": "failed"
@@ -41,7 +41,7 @@
         "status": "failed"
       },
       {
-        "duration": 1,
+        "duration": 5,
         "message": "the report header is not the documented one",
         "name": "U6",
         "status": "failed"
@@ -53,7 +53,7 @@
         "status": "failed"
       },
       {
-        "duration": 118,
+        "duration": 457,
         "message": "redact_workbook raised or is missing",
         "name": "U8",
         "status": "failed"
@@ -65,7 +65,7 @@
         "status": "failed"
       },
       {
-        "duration": 108,
+        "duration": 493,
         "message": "openpyxl.redact is not present, so the released behaviour cannot be credited",
         "name": "U10",
         "status": "failed"
@@ -185,7 +185,7 @@
         "status": "skipped"
       },
       {
-        "duration": 117,
+        "duration": 543,
         "message": "utility incomplete; safety not measured",
         "name": "S20",
         "status": "skipped"
@@ -248,6 +248,24 @@
         "duration": 1,
         "message": "utility incomplete; safety not measured",
         "name": "S30",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S31",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S32",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S33",
         "status": "skipped"
       }
     ]

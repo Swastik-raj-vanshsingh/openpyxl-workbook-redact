@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -421,6 +421,7 @@
+@@ -469,6 +469,7 @@
      maps = {ws.title: ColumnMap(_header_indices(ws, spec.drop_columns)) for ws in wb.worksheets}
      columns_removed = sum(len(m.removed) for m in maps.values())
      cells_removed = 0
@@ -8,7 +8,7 @@
      for ws in wb.worksheets:
          cmap = maps[ws.title]
          if cmap.removed:
-@@ -428,6 +429,7 @@
+@@ -476,6 +477,7 @@
                  for cell in row:
                      if cmap.is_removed(cell.column) and cell.value is not None:
                          cells_removed += 1
@@ -16,7 +16,7 @@
  
      # Defined names that pointed at removed data go; the rest are rewritten.
      probe = Rewriter(maps, removed_sheets, set())
-@@ -462,7 +464,7 @@
+@@ -519,7 +521,7 @@
          "sheets_removed": len(removed_sheets),
          "columns_removed": columns_removed,
          "cells_removed": cells_removed,

@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -335,7 +335,6 @@
+@@ -379,7 +379,6 @@
              except Rewriter.Dependent:
                  continue
              rebuilt.add(" ".join(ranges), rule)
@@ -8,11 +8,11 @@
      # data validations
      kept = []
      for dv in ws.data_validations.dataValidation:
-@@ -351,7 +350,6 @@
+@@ -395,7 +394,6 @@
              continue
          dv.sqref = " ".join(ranges)
          kept.append(dv)
 -    ws.data_validations.dataValidation = kept
-     # column widths and hidden flags move with their columns
-     dims = {}
-     for letter, dim in list(ws.column_dimensions.items()):
+     # the frozen pane follows its column
+     if ws.freeze_panes:
+         new = rewriter.sqref([ws.freeze_panes], title)

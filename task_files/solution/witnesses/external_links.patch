@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -406,7 +406,7 @@
+@@ -454,7 +454,7 @@
      if os.path.lexists(destination):
          raise RedactionRefused("a file is already at the destination")
  

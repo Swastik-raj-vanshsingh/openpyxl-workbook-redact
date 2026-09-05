@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -300,11 +300,6 @@
+@@ -333,11 +333,6 @@
  def _rewrite_sheet_structures(ws, rewriter: Rewriter, cmap: ColumnMap) -> None:
      title = ws.title
      # merged ranges

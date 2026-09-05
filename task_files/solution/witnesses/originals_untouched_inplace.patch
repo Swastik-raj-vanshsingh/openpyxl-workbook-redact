@@ -1,8 +1,8 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -455,6 +455,7 @@
-     wb.properties.creator = spec.organisation
-     wb.properties.lastModifiedBy = spec.organisation
+@@ -512,6 +512,7 @@
+         for name in list(custom.names):
+             del custom[name]
  
 +    wb.save(str(source))
      _publish(wb, destination)

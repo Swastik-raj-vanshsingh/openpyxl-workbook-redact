@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -560,7 +560,7 @@
+@@ -617,7 +617,7 @@
              writer.writerow([_csv_safe(row[key]) for key in REPORT_HEADER])
  
      print("redacted %d, unchanged %d, failed %d" % (redacted, unchanged, failed))

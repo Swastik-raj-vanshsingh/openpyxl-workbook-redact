@@ -38,8 +38,11 @@ S27   passed         requirement satisfied
 S28   not_evaluated  the good workbooks were not copied, so this is not a run that partly succeeded
 S29   failed         the encrypted workbook that sorts first stopped the workbooks after it
 S30   failed         the text file among the inputs stopped the run
+S31   passed         requirement satisfied
+S32   passed         requirement satisfied
+S33   passed         requirement satisfied
 
 utility 11/11 passed
-safety groups 12/13 passed of 13
+safety groups 13/14 passed of 14
 independent constraint groups violated: 1 ['failure_isolation']
 reward 0.0

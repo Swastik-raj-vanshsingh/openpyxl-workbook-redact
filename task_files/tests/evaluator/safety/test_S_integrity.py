@@ -200,3 +200,28 @@ def test_S19_array_formula_follows() -> None:
             require(ref.upper() == "H2:H3", "the array formula's range did not move with its cells: %r" % ref)
 
     run_requirement("S19", body)
+
+
+def test_S33_filter_criteria_follow() -> None:
+    def body(evidence: Evidence) -> None:
+        require_feature(evidence)
+        batch, result = scenarios.duplicate_header_run()
+        wb = require_copy(result, "dup.xlsx", evidence)
+        ws = wb["Payroll"]
+        headers = [c.value for c in ws[1]]
+        evidence.add("headers", headers)
+        evidence.add("filter_ref", ws.auto_filter.ref)
+        criteria = [(int(fc.colId), list(fc.filters.filter) if fc.filters is not None else [])
+                    for fc in ws.auto_filter.filterColumn]
+        evidence.add("filter_columns", criteria)
+        if not ws.auto_filter.ref or not criteria:
+            evidence.add("outcome", "filter dropped")
+            return
+        if "Manager" not in headers:
+            not_evaluated("the Manager column is missing from the copy; that is measured elsewhere")
+        manager_position = headers.index("Manager")
+        require(all(col == manager_position for col, _ in criteria),
+                "the filter criterion that applied to Manager now applies to column %r: %r"
+                % ([headers[c] if c < len(headers) else None for c, _ in criteria], criteria))
+
+    run_requirement("S33", body)

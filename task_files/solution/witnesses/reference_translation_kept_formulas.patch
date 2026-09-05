@@ -1,6 +1,6 @@
 --- a/openpyxl/redact.py
 +++ b/openpyxl/redact.py
-@@ -279,7 +279,7 @@
+@@ -312,7 +312,7 @@
                      marked += 1
              elif cell.data_type == "f" and isinstance(value, str):
                  try:
