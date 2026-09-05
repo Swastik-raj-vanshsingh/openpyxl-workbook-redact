@@ -1,0 +1,1398 @@
+{
+  "requirements": [
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 117,
+      "evidence": [
+        {
+          "label": "returncode",
+          "value": 0
+        },
+        {
+          "label": "help",
+          "value": "usage: python -m openpyxl.redact [-h] --spec SPEC --report REPORT\n                                 input_dir output_dir\n\npositional arguments:\n  input_dir\n  output_dir\n\noptions:\n  -h, --help       show this help message and exit\n  --spec SPEC\n  --report REPORT\n"
+        }
+      ],
+      "id": "U1",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 199,
+      "evidence": [
+        {
+          "label": "returncode",
+          "value": 0
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        }
+      ],
+      "id": "U2",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 158,
+      "evidence": [
+        {
+          "label": "sheets",
+          "value": [
+            "Staff",
+            "Summary"
+          ]
+        }
+      ],
+      "id": "U3",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "headers",
+          "value": [
+            "Name",
+            "Dept",
+            "Grade",
+            "Manager",
+            "Bonus",
+            "Note",
+            "Ref",
+            null
+          ]
+        },
+        {
+          "label": "row2",
+          "value": [
+            "Ann",
+            "Ops",
+            "B",
+            "Zed",
+            "#REDACTED",
+            "=see HR before quoting",
+            "=E2",
+            "<openpyxl.worksheet.formula.ArrayFormula object at 0xffff847c2c10>"
+          ]
+        }
+      ],
+      "id": "U4",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "bonus_cells",
+          "value": [
+            "#REDACTED",
+            "#REDACTED"
+          ]
+        }
+      ],
+      "id": "U5",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "header",
+          "value": [
+            "workbook",
+            "status",
+            "sheets_removed",
+            "columns_removed",
+            "cells_removed",
+            "detail"
+          ]
+        },
+        {
+          "label": "rows",
+          "value": [
+            [
+              "budget.xlsx",
+              "unchanged"
+            ],
+            [
+              "campaigns.xlsx",
+              "redacted"
+            ],
+            [
+              "plain.xlsx",
+              "unchanged"
+            ],
+            [
+              "staff.xlsx",
+              "redacted"
+            ]
+          ]
+        }
+      ],
+      "id": "U6",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "stdout",
+          "value": "redacted 1, unchanged 1, failed 0\n"
+        },
+        {
+          "label": "summary",
+          "value": {
+            "failed": 0,
+            "redacted": 1,
+            "unchanged": 1
+          }
+        }
+      ],
+      "id": "U7",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 115,
+      "evidence": [
+        {
+          "label": "returncode",
+          "value": 0
+        },
+        {
+          "label": "stdout",
+          "value": "{\"workbook\": \"staff.xlsx\", \"status\": \"redacted\", \"sheets_removed\": 1, \"columns_removed\": 1, \"cells_removed\": 4, \"detail\": \"removed: Salary; 50731; 62842; =SUM(B2:B3)\"}\n"
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        }
+      ],
+      "id": "U8",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "comments",
+          "value": {
+            "D2": "checked"
+          }
+        }
+      ],
+      "id": "U9",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 662,
+      "evidence": [
+        {
+          "label": "module_present",
+          "value": true
+        },
+        {
+          "label": "returncode",
+          "value": 0
+        },
+        {
+          "label": "tail",
+          "value": "...................................................................... [ 25%]\n...........................................................x............ [ 38%]\n........................................................................ [ 51%]\n........................................................................ [ 64%]\n........................................................................ [ 77%]\n........................................................................ [ 89%]\n.........................................................                [100%]\n559 passed, 1 skipped, 1 xfailed in 0.37s\n"
+        }
+      ],
+      "id": "U10",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": null,
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "values",
+          "value": [
+            [
+              "Item",
+              "Count"
+            ],
+            [
+              "widgets",
+              3
+            ]
+          ]
+        },
+        {
+          "label": "row",
+          "value": {
+            "cells_removed": "0",
+            "columns_removed": "0",
+            "detail": "removed: ",
+            "sheets_removed": "0",
+            "status": "unchanged",
+            "workbook": "plain.xlsx"
+          }
+        }
+      ],
+      "id": "U11",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": "column_resolution",
+      "deferred": false,
+      "duration_ms": 142,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 1, unchanged 0, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "dup.xlsx"
+          ]
+        },
+        {
+          "label": "headers",
+          "value": [
+            "Name",
+            "Dept",
+            "Grade",
+            "NI Number",
+            " salary "
+          ]
+        },
+        {
+          "label": "leaked",
+          "value": [
+            "71953",
+            "71954"
+          ]
+        },
+        {
+          "label": "loosely_spelt_headers_left",
+          "value": [
+            " salary "
+          ]
+        }
+      ],
+      "id": "S1",
+      "message": "the second Salary column, spelt ' salary ', is still in the copy with its values",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "column_resolution",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 1, unchanged 0, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "dup.xlsx"
+          ]
+        },
+        {
+          "label": "headers",
+          "value": [
+            "Name",
+            "Dept",
+            "Grade",
+            "NI Number",
+            " salary "
+          ]
+        },
+        {
+          "label": "ni_numbers_left",
+          "value": [
+            "QQ777777E",
+            "QQ654321D"
+          ]
+        }
+      ],
+      "id": "S2",
+      "message": "the Manager column, which was not named, was removed: the second deletion drifted",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "pivot_cache",
+      "deferred": false,
+      "duration_ms": 8,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "raw_headers",
+          "value": [
+            "ID",
+            "campaign_name",
+            "budget_date",
+            "hour",
+            "impressions"
+          ]
+        },
+        {
+          "label": "pivot_cache_parts",
+          "value": [
+            "xl/pivotCache/pivotCacheRecords1.xml",
+            "xl/pivotCache/_rels/pivotCacheDefinition1.xml.rels",
+            "xl/pivotCache/pivotCacheDefinition1.xml"
+          ]
+        },
+        {
+          "label": "owner_values_in_cache",
+          "value": [
+            "Jack",
+            "Jill"
+          ]
+        }
+      ],
+      "id": "S3",
+      "message": "the pivot table's cache still lists every value of the removed owner column: ['Jack', 'Jill']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "external_links",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "external_link_parts",
+          "value": [
+            "xl/externalLinks/externalLink1.xml",
+            "xl/externalLinks/_rels/externalLink1.xml.rels"
+          ]
+        },
+        {
+          "label": "host_in_copy",
+          "value": [
+            "hr-fileserver"
+          ]
+        }
+      ],
+      "id": "S4",
+      "message": "the copy still links to another workbook on an internal server",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "document_properties",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "creator",
+          "value": "Priya Kapoor"
+        },
+        {
+          "label": "lastModifiedBy",
+          "value": "hr-laptop-17"
+        }
+      ],
+      "id": "S5",
+      "message": "the copy's document properties still name the author or the machine: ['Priya Kapoor', 'hr-laptop-17']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "report_confidentiality",
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "staff_row",
+          "value": {
+            "cells_removed": "4",
+            "columns_removed": "1",
+            "detail": "removed: Salary; 50731; 62842; =SUM(B2:B3)",
+            "sheets_removed": "1",
+            "status": "redacted",
+            "workbook": "staff.xlsx"
+          }
+        },
+        {
+          "label": "values_in_report",
+          "value": [
+            "50731"
+          ]
+        }
+      ],
+      "id": "S6",
+      "message": "the report contains removed values: ['50731']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "formula_injection",
+      "deferred": false,
+      "duration_ms": 12,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "note_cell",
+          "value": [
+            "=see HR before quoting",
+            "s"
+          ]
+        },
+        {
+          "label": "neighbour",
+          "value": [
+            "ok",
+            "s"
+          ]
+        }
+      ],
+      "id": "S7",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": "formula_injection",
+      "deferred": false,
+      "duration_ms": 134,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        },
+        {
+          "label": "marker_cell",
+          "value": [
+            "=REDACTED()",
+            "f"
+          ]
+        }
+      ],
+      "id": "S8",
+      "message": "the marker was written as a live formula",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "reference_translation",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "G2",
+          "value": "=E2"
+        },
+        {
+          "label": "G4",
+          "value": "=COUNTA(E2:E3)"
+        }
+      ],
+      "id": "S9",
+      "message": "the Ref formula still points at column E, which now holds Bonus: '=E2'",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "reference_translation",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "A1",
+          "value": "=Staff!B2"
+        },
+        {
+          "label": "A4",
+          "value": "=SUM(Staff!B2:B3)"
+        }
+      ],
+      "id": "S10",
+      "message": "formulas on the Summary sheet that used the removed Salary column now read whatever moved into column B: ['=Staff!B2', '=SUM(Staff!B2:B3)']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "reference_translation",
+      "deferred": false,
+      "duration_ms": 3,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "A2",
+          "value": "=Staff!E2"
+        }
+      ],
+      "id": "S11",
+      "message": "the Summary formula that referenced the kept Manager column still points at Staff!E2: '=Staff!E2'",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "reference_translation",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "names",
+          "value": {
+            "Managers": "Staff!$E$2:$E$3",
+            "NoteTotal": "Notes!$A$1",
+            "SalaryRange": "Staff!$B$2:$B$3"
+          }
+        },
+        {
+          "label": "Summary_A6",
+          "value": "=SalaryRange"
+        }
+      ],
+      "id": "S12",
+      "message": "the SalaryRange name still covers column B, which now holds Dept, and formulas still use it: 'Staff!$B$2:$B$3'",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "range_integrity",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "tables",
+          "value": [
+            [
+              "StaffTable",
+              "A1:H3",
+              [
+                "Name",
+                "Salary",
+                "Dept",
+                "Grade",
+                "Manager",
+                "Bonus",
+                "Note",
+                "Ref"
+              ]
+            ]
+          ]
+        }
+      ],
+      "id": "S13",
+      "message": "the table still spans A1:H3 although a column is gone; Excel will repair the file: 'A1:H3'",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "range_integrity",
+      "deferred": false,
+      "duration_ms": 3,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "merged",
+          "value": [
+            "A6:H6"
+          ]
+        }
+      ],
+      "id": "S14",
+      "message": "the banner still merges A6:H6 although a column is gone: ['A6:H6']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "range_integrity",
+      "deferred": false,
+      "duration_ms": 3,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "conditional_formatting",
+          "value": [
+            "E2:E3"
+          ]
+        },
+        {
+          "label": "data_validations",
+          "value": [
+            "B2:B3"
+          ]
+        }
+      ],
+      "id": "S15",
+      "message": "the conditional format that highlighted managers now highlights Bonus (column E): ['E2:E3']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "range_integrity",
+      "deferred": false,
+      "duration_ms": 3,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "dimensions",
+          "value": {
+            "C": [
+              false,
+              22.0
+            ],
+            "E": [
+              true,
+              13.0
+            ]
+          }
+        }
+      ],
+      "id": "S16",
+      "message": "the Manager column was hidden in the original and is visible in the copy: hidden=['E']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "reference_translation",
+      "deferred": false,
+      "duration_ms": 3,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "names_referring",
+          "value": [
+            "NoteTotal"
+          ]
+        },
+        {
+          "label": "cells_referring",
+          "value": [
+            [
+              "Summary",
+              "A3",
+              "=Notes!A1"
+            ]
+          ]
+        }
+      ],
+      "id": "S17",
+      "message": "defined names still point at the removed sheet: ['NoteTotal']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "reference_translation",
+      "deferred": false,
+      "duration_ms": 2,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stdout_tail",
+          "value": "redacted 2, unchanged 2, failed 0\n"
+        },
+        {
+          "label": "stderr_tail",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "budget.xlsx",
+            "campaigns.xlsx",
+            "plain.xlsx",
+            "staff.xlsx"
+          ]
+        },
+        {
+          "label": "H2",
+          "value": [
+            "ArrayFormula",
+            "=E2:E3",
+            "I2:I3"
+          ]
+        }
+      ],
+      "id": "S19",
+      "message": "the array formula over the kept Manager column was lost or still reads column E: '=E2:E3'",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "destination_integrity",
+      "deferred": false,
+      "duration_ms": 235,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        },
+        {
+          "label": "occupant_intact",
+          "value": false
+        },
+        {
+          "label": "statuses",
+          "value": {
+            "plain.xlsx": "unchanged",
+            "staff.xlsx": "redacted"
+          }
+        }
+      ],
+      "id": "S20",
+      "message": "the file already at the destination was replaced",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "destination_integrity",
+      "deferred": false,
+      "duration_ms": 110,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        },
+        {
+          "label": "target_intact",
+          "value": false
+        }
+      ],
+      "id": "S21",
+      "message": "the file behind the symlink at the destination was overwritten",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "originals_untouched",
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "changed",
+          "value": []
+        },
+        {
+          "label": "added",
+          "value": []
+        }
+      ],
+      "id": "S22",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": "originals_untouched",
+      "deferred": false,
+      "duration_ms": 112,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        },
+        {
+          "label": "added_under_input",
+          "value": [
+            "out/staff.xlsx"
+          ]
+        }
+      ],
+      "id": "S23",
+      "message": "copies were written into the originals folder: ['out/staff.xlsx']",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "destination_integrity",
+      "deferred": false,
+      "duration_ms": 10452,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "killed_while_running",
+          "value": true
+        },
+        {
+          "label": "exit",
+          "value": -9
+        },
+        {
+          "label": "destination_size",
+          "value": 2086
+        },
+        {
+          "label": "valid_zip",
+          "value": false
+        },
+        {
+          "label": "opens",
+          "value": false
+        }
+      ],
+      "id": "S24",
+      "message": "a half-written copy was left at the destination the auditor collects from",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "spec_validation",
+      "deferred": false,
+      "duration_ms": 125,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "staff.xlsx"
+          ]
+        }
+      ],
+      "id": "S25",
+      "message": "a spec whose list field is a string was applied and copies were written",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "spec_validation",
+      "deferred": false,
+      "duration_ms": 146,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 0
+        },
+        {
+          "label": "stderr",
+          "value": ""
+        },
+        {
+          "label": "copies",
+          "value": [
+            "staff.xlsx"
+          ]
+        }
+      ],
+      "id": "S26",
+      "message": "a spec with an unknown field was applied and copies were written",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "truthful_report",
+      "deferred": false,
+      "duration_ms": 3,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "row",
+          "value": {
+            "cells_removed": "4",
+            "columns_removed": "1",
+            "detail": "removed: Salary; 50731; 62842; =SUM(B2:B3)",
+            "sheets_removed": "1",
+            "status": "redacted",
+            "workbook": "staff.xlsx"
+          }
+        }
+      ],
+      "id": "S27",
+      "message": "requirement satisfied",
+      "status": "passed"
+    },
+    {
+      "constraint_id": "truthful_report",
+      "deferred": false,
+      "duration_ms": 203,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 1
+        },
+        {
+          "label": "summary",
+          "value": null
+        },
+        {
+          "label": "statuses",
+          "value": []
+        }
+      ],
+      "id": "S28",
+      "message": "the good workbooks were not copied, so this is not a run that partly succeeded",
+      "status": "not_evaluated"
+    },
+    {
+      "constraint_id": "failure_isolation",
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "exit",
+          "value": 1
+        },
+        {
+          "label": "stderr",
+          "value": "_\n    self.archive = _validate_archive(fn)\n                   ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/openpyxl/reader/excel.py\", line 95, in _validate_archive\n    archive = ZipFile(filename, 'r')\n              ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/zipfile.py\", line 1330, in __init__\n    self._RealGetContents()\n  File \"/usr/local/lib/python3.11/zipfile.py\", line 1397, in _RealGetContents\n    raise BadZipFile(\"File is not a zip file\")\nzipfile.BadZipFile: File is not a zip file\n"
+        },
+        {
+          "label": "copies",
+          "value": []
+        },
+        {
+          "label": "statuses",
+          "value": {}
+        }
+      ],
+      "id": "S29",
+      "message": "the encrypted workbook that sorts first stopped the workbooks after it",
+      "status": "failed"
+    },
+    {
+      "constraint_id": "failure_isolation",
+      "deferred": false,
+      "duration_ms": 1,
+      "evidence": [
+        {
+          "label": "feature_probe",
+          "value": "present"
+        },
+        {
+          "label": "statuses",
+          "value": {}
+        },
+        {
+          "label": "copies",
+          "value": []
+        }
+      ],
+      "id": "S30",
+      "message": "the text file among the inputs stopped the run",
+      "status": "failed"
+    }
+  ],
+  "schema_version": "1.0"
+}

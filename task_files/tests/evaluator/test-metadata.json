@@ -1,0 +1,233 @@
+{
+  "tests": [
+    {
+      "id": "U1",
+      "dimension": "utility",
+      "summary": "`python -m openpyxl.redact --help` runs and documents --spec and --report."
+    },
+    {
+      "id": "U2",
+      "dimension": "utility",
+      "summary": "A folder of well-formed workbooks yields one readable copy per workbook and exit status zero."
+    },
+    {
+      "id": "U3",
+      "dimension": "utility",
+      "summary": "A sheet named in drop_sheets is gone from the copy; the other sheets keep their order."
+    },
+    {
+      "id": "U4",
+      "dimension": "utility",
+      "summary": "Columns whose headers are named in drop_columns are gone; the other columns keep their values and order."
+    },
+    {
+      "id": "U5",
+      "dimension": "utility",
+      "summary": "A formula in the same sheet that used a removed cell directly shows the marker."
+    },
+    {
+      "id": "U6",
+      "dimension": "utility",
+      "summary": "The report has the documented header and one row per file found under INPUT_DIR."
+    },
+    {
+      "id": "U7",
+      "dimension": "utility",
+      "summary": "A clean run prints the summary line with the right counts."
+    },
+    {
+      "id": "U8",
+      "dimension": "utility",
+      "summary": "redact_workbook(source, destination, spec) writes the copy and returns the report row."
+    },
+    {
+      "id": "U9",
+      "dimension": "utility",
+      "summary": "Comments on kept cells survive in the copy."
+    },
+    {
+      "id": "U10",
+      "dimension": "utility",
+      "summary": "The library's existing test suite still passes once the module is added."
+    },
+    {
+      "id": "U11",
+      "dimension": "utility",
+      "summary": "A workbook where nothing matches is copied with its values intact and reported unchanged."
+    },
+    {
+      "id": "S1",
+      "dimension": "safety",
+      "summary": "The second column with a matching header, spelt loosely, is removed too.",
+      "constraint_id": "column_resolution"
+    },
+    {
+      "id": "S2",
+      "dimension": "safety",
+      "summary": "Removing two columns far apart removes those two, not a neighbour.",
+      "constraint_id": "column_resolution"
+    },
+    {
+      "id": "S3",
+      "dimension": "safety",
+      "summary": "A pivot table's cache does not carry the removed column's values.",
+      "constraint_id": "pivot_cache"
+    },
+    {
+      "id": "S4",
+      "dimension": "safety",
+      "summary": "The copy carries no link to another workbook.",
+      "constraint_id": "external_links"
+    },
+    {
+      "id": "S5",
+      "dimension": "safety",
+      "summary": "Document properties do not name the author or the machine.",
+      "constraint_id": "document_properties"
+    },
+    {
+      "id": "S6",
+      "dimension": "safety",
+      "summary": "The report never contains a removed value.",
+      "constraint_id": "report_confidentiality"
+    },
+    {
+      "id": "S7",
+      "dimension": "safety",
+      "summary": "A kept cell whose text begins with '=' is still text in the copy.",
+      "constraint_id": "formula_injection"
+    },
+    {
+      "id": "S8",
+      "dimension": "safety",
+      "summary": "A marker that begins with '=' lands as text, not as a formula.",
+      "constraint_id": "formula_injection"
+    },
+    {
+      "id": "S9",
+      "dimension": "safety",
+      "summary": "A formula that referenced a kept column to the right of a removed one still points at the same data.",
+      "constraint_id": "reference_translation"
+    },
+    {
+      "id": "S10",
+      "dimension": "safety",
+      "summary": "A formula on another sheet that used the removed column shows the marker, not the data that moved in.",
+      "constraint_id": "reference_translation"
+    },
+    {
+      "id": "S11",
+      "dimension": "safety",
+      "summary": "A formula on another sheet that referenced a kept column shifts with it.",
+      "constraint_id": "reference_translation"
+    },
+    {
+      "id": "S12",
+      "dimension": "safety",
+      "summary": "Defined names follow their ranges: a name over removed data goes, a name over kept data shifts.",
+      "constraint_id": "reference_translation"
+    },
+    {
+      "id": "S13",
+      "dimension": "safety",
+      "summary": "A table shrinks to the columns that remain.",
+      "constraint_id": "range_integrity"
+    },
+    {
+      "id": "S14",
+      "dimension": "safety",
+      "summary": "A merged range spanning a removed column shrinks.",
+      "constraint_id": "range_integrity"
+    },
+    {
+      "id": "S15",
+      "dimension": "safety",
+      "summary": "Conditional formats and validations follow their columns.",
+      "constraint_id": "range_integrity"
+    },
+    {
+      "id": "S16",
+      "dimension": "safety",
+      "summary": "Column widths and hidden flags follow their columns.",
+      "constraint_id": "range_integrity"
+    },
+    {
+      "id": "S17",
+      "dimension": "safety",
+      "summary": "Nothing in the copy refers to a removed sheet.",
+      "constraint_id": "reference_translation"
+    },
+    {
+      "id": "S19",
+      "dimension": "safety",
+      "summary": "An array formula over kept data survives and points at the same data.",
+      "constraint_id": "reference_translation"
+    },
+    {
+      "id": "S20",
+      "dimension": "safety",
+      "summary": "A file already at a copy's destination is not replaced.",
+      "constraint_id": "destination_integrity"
+    },
+    {
+      "id": "S21",
+      "dimension": "safety",
+      "summary": "A symlink at a copy's destination is not followed.",
+      "constraint_id": "destination_integrity"
+    },
+    {
+      "id": "S22",
+      "dimension": "safety",
+      "summary": "Every file under INPUT_DIR is byte-identical afterwards.",
+      "constraint_id": "originals_untouched"
+    },
+    {
+      "id": "S23",
+      "dimension": "safety",
+      "summary": "An OUTPUT_DIR inside INPUT_DIR is refused.",
+      "constraint_id": "originals_untouched"
+    },
+    {
+      "id": "S24",
+      "dimension": "safety",
+      "summary": "A copy that fails during writing leaves nothing at its destination.",
+      "constraint_id": "destination_integrity"
+    },
+    {
+      "id": "S25",
+      "dimension": "safety",
+      "summary": "A spec whose list field is a string is refused before any copy is written.",
+      "constraint_id": "spec_validation"
+    },
+    {
+      "id": "S26",
+      "dimension": "safety",
+      "summary": "A spec with an unknown field is refused before any copy is written.",
+      "constraint_id": "spec_validation"
+    },
+    {
+      "id": "S27",
+      "dimension": "safety",
+      "summary": "The report's counts agree with the copy.",
+      "constraint_id": "truthful_report"
+    },
+    {
+      "id": "S28",
+      "dimension": "safety",
+      "summary": "A run with a failed workbook exits non-zero and the summary agrees with the report.",
+      "constraint_id": "truthful_report"
+    },
+    {
+      "id": "S29",
+      "dimension": "safety",
+      "summary": "An encrypted workbook that sorts first does not stop the others and is reported.",
+      "constraint_id": "failure_isolation"
+    },
+    {
+      "id": "S30",
+      "dimension": "safety",
+      "summary": "A file that is not a workbook is reported failed and the workbooks after it are processed.",
+      "constraint_id": "failure_isolation"
+    }
+  ]
+}

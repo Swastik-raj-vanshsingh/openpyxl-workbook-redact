@@ -1,0 +1,10 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -257,7 +257,6 @@
+ 
+ def _mark(cell, marker: str) -> None:
+     cell.value = marker
+-    cell.data_type = "s"
+ 
+ 
+ def _rewrite_cells(ws, rewriter: Rewriter, marker: str) -> int:

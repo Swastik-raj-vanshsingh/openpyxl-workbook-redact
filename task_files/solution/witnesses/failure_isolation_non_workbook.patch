@@ -1,0 +1,14 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -523,11 +523,6 @@
+     redacted = unchanged = failed = 0
+     for path in sorted(p for p in source_root.iterdir() if p.is_file()):
+         if not _is_workbook_candidate(path):
+-            failed += 1
+-            rows.append({"workbook": path.name, "status": "failed", "sheets_removed": 0,
+-                         "columns_removed": 0, "cells_removed": 0,
+-                         "detail": "not a workbook this library can open"})
+-            print("failed %s: not a workbook" % path.name, file=sys.stderr)
+             continue
+         try:
+             row = redact_workbook(path, target_root / path.name, spec)

@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -452,8 +452,6 @@
+             ws.delete_cols(index)
+ 
+     # The workbook's own record of who made it.
+-    wb.properties.creator = spec.organisation
+-    wb.properties.lastModifiedBy = spec.organisation
+ 
+     _publish(wb, destination)
+     return {

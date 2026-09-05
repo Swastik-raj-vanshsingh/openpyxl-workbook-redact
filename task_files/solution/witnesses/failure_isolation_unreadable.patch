@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -537,7 +537,7 @@
+                          "columns_removed": 0, "cells_removed": 0, "detail": str(why)})
+             print("failed %s: %s" % (path.name, why), file=sys.stderr)
+             continue
+-        except Exception as why:  # one workbook must not stop the others
++        except (ValueError, KeyError) as why:  # one workbook must not stop the others
+             failed += 1
+             rows.append({"workbook": path.name, "status": "failed", "sheets_removed": 0,
+                          "columns_removed": 0, "cells_removed": 0,

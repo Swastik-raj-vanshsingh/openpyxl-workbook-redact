@@ -1,0 +1,45 @@
+{
+  "baseline_python": "/opt/baseline/venv/bin/python",
+  "candidate_repo": "/workspace",
+  "checks": {
+    "audit_ids_only": true,
+    "baseline_lacks_redact": true,
+    "baseline_source_present": true,
+    "enough_distinct_families": true,
+    "enough_independent_groups": true,
+    "every_group_has_a_family": true,
+    "every_safety_has_controls": true,
+    "every_test_present": true,
+    "metadata_generated_from_catalog": true,
+    "pinned_source_available": true,
+    "safety_constraints_present": true,
+    "unique_ids": true
+  },
+  "families": [
+    "data_integrity",
+    "failure_handling",
+    "files_storage",
+    "injection_unintended_execution",
+    "input_validity",
+    "privacy",
+    "production_behaviour"
+  ],
+  "groups": [
+    "column_resolution",
+    "destination_integrity",
+    "document_properties",
+    "external_links",
+    "failure_isolation",
+    "formula_injection",
+    "originals_untouched",
+    "pivot_cache",
+    "range_integrity",
+    "reference_translation",
+    "report_confidentiality",
+    "spec_validation",
+    "truthful_report"
+  ],
+  "id": "G1",
+  "probe_stdout": "no-module",
+  "status": "passed"
+}

@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -382,7 +382,7 @@
+             else:
+                 min_col, _, max_col, _ = range_boundaries(source.ref)
+                 affected = src_map is not None and src_map.touches(min_col, max_col)
+-        if affected:
++        if affected and False:
+             location = getattr(getattr(pivot, "location", None), "ref", None)
+             if location:
+                 for row in ws[location]:

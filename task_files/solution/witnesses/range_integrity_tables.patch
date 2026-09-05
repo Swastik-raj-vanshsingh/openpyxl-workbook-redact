@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -306,7 +306,7 @@
+         if new:
+             ws.merged_cells.add(CellRange(new[0]))
+     # tables
+-    for name in list(ws.tables.keys()):
++    for name in []:
+         table = ws.tables[name]
+         min_col, min_row, max_col, max_row = range_boundaries(table.ref)
+         span = cmap.shift_range(min_col, max_col)

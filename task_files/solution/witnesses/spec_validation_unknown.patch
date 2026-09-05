@@ -1,0 +1,12 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -66,9 +66,6 @@
+     def __init__(self, raw: Any) -> None:
+         if not isinstance(raw, dict):
+             raise SpecError("the spec must be a JSON object")
+-        unknown = set(raw) - SPEC_FIELDS
+-        if unknown:
+-            raise SpecError("unknown spec field(s): %s" % ", ".join(sorted(unknown)))
+         for name in ("drop_sheets", "drop_columns"):
+             value = raw.get(name, [])
+             if not isinstance(value, list) or not all(isinstance(v, str) and v.strip() for v in value):

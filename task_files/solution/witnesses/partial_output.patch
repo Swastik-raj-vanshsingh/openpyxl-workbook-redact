@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -455,7 +455,7 @@
+     wb.properties.creator = spec.organisation
+     wb.properties.lastModifiedBy = spec.organisation
+ 
+-    _publish(wb, destination)
++    wb.save(str(destination))
+     return {
+         "workbook": source.name,
+         "status": "redacted" if (removed_sheets or columns_removed or marked) else "unchanged",

@@ -1,0 +1,10 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -266,6 +266,7 @@
+         for cell in row:
+             value = cell.value
+             if isinstance(value, ArrayFormula):
++                continue
+                 try:
+                     text = rewriter.formula(value.text or "", ws.title)
+                     ref = rewriter.sqref([value.ref], ws.title) if value.ref else []

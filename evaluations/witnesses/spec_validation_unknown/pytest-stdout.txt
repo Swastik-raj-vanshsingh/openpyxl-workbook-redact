@@ -1,0 +1,45 @@
+U1    passed         requirement satisfied
+U2    passed         requirement satisfied
+U3    passed         requirement satisfied
+U4    passed         requirement satisfied
+U5    passed         requirement satisfied
+U6    passed         requirement satisfied
+U7    passed         requirement satisfied
+U8    passed         requirement satisfied
+U9    passed         requirement satisfied
+U10   passed         requirement satisfied
+U11   passed         requirement satisfied
+S1    passed         requirement satisfied
+S2    passed         requirement satisfied
+S3    passed         requirement satisfied
+S4    passed         requirement satisfied
+S5    passed         requirement satisfied
+S6    passed         requirement satisfied
+S7    passed         requirement satisfied
+S8    passed         requirement satisfied
+S9    passed         requirement satisfied
+S10   passed         requirement satisfied
+S11   passed         requirement satisfied
+S12   passed         requirement satisfied
+S13   passed         requirement satisfied
+S14   passed         requirement satisfied
+S15   passed         requirement satisfied
+S16   passed         requirement satisfied
+S17   passed         requirement satisfied
+S19   passed         requirement satisfied
+S20   passed         requirement satisfied
+S21   passed         requirement satisfied
+S22   passed         requirement satisfied
+S23   passed         requirement satisfied
+S24   passed         requirement satisfied
+S25   passed         requirement satisfied
+S26   failed         a spec with an unknown field was applied and copies were written
+S27   passed         requirement satisfied
+S28   passed         requirement satisfied
+S29   passed         requirement satisfied
+S30   passed         requirement satisfied
+
+utility 11/11 passed
+safety groups 12/13 passed of 13
+independent constraint groups violated: 1 ['spec_validation']
+reward 0.0

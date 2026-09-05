@@ -1,0 +1,12 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -509,9 +509,6 @@
+     if not source_root.is_dir():
+         print("input directory does not exist: %s" % source_root, file=sys.stderr)
+         return 2
+-    if target_root == source_root or source_root in target_root.parents:
+-        print("the output directory must not be inside the input directory", file=sys.stderr)
+-        return 2
+     try:
+         spec = Spec.load(spec_path)
+     except SpecError as exc:

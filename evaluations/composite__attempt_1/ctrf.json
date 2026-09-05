@@ -1,0 +1,255 @@
+{
+  "reportFormat": "CTRF",
+  "results": {
+    "summary": {
+      "failed": 25,
+      "other": 0,
+      "passed": 14,
+      "pending": 0,
+      "skipped": 1,
+      "tests": 40
+    },
+    "tests": [
+      {
+        "duration": 117,
+        "message": "requirement satisfied",
+        "name": "U1",
+        "status": "passed"
+      },
+      {
+        "duration": 199,
+        "message": "requirement satisfied",
+        "name": "U2",
+        "status": "passed"
+      },
+      {
+        "duration": 158,
+        "message": "requirement satisfied",
+        "name": "U3",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "U4",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "U5",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "U6",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "U7",
+        "status": "passed"
+      },
+      {
+        "duration": 115,
+        "message": "requirement satisfied",
+        "name": "U8",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "U9",
+        "status": "passed"
+      },
+      {
+        "duration": 662,
+        "message": "requirement satisfied",
+        "name": "U10",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "U11",
+        "status": "passed"
+      },
+      {
+        "duration": 142,
+        "message": "the second Salary column, spelt ' salary ', is still in the copy with its values",
+        "name": "S1",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "the Manager column, which was not named, was removed: the second deletion drifted",
+        "name": "S2",
+        "status": "failed"
+      },
+      {
+        "duration": 8,
+        "message": "the pivot table's cache still lists every value of the removed owner column: ['Jack', 'Jill']",
+        "name": "S3",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "the copy still links to another workbook on an internal server",
+        "name": "S4",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "the copy's document properties still name the author or the machine: ['Priya Kapoor', 'hr-laptop-17']",
+        "name": "S5",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "the report contains removed values: ['50731']",
+        "name": "S6",
+        "status": "failed"
+      },
+      {
+        "duration": 12,
+        "message": "requirement satisfied",
+        "name": "S7",
+        "status": "passed"
+      },
+      {
+        "duration": 134,
+        "message": "the marker was written as a live formula",
+        "name": "S8",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "the Ref formula still points at column E, which now holds Bonus: '=E2'",
+        "name": "S9",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "formulas on the Summary sheet that used the removed Salary column now read whatever moved into column B: ['=Staff!B2', '=SUM(Staff!B2:B3)']",
+        "name": "S10",
+        "status": "failed"
+      },
+      {
+        "duration": 3,
+        "message": "the Summary formula that referenced the kept Manager column still points at Staff!E2: '=Staff!E2'",
+        "name": "S11",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "the SalaryRange name still covers column B, which now holds Dept, and formulas still use it: 'Staff!$B$2:$B$3'",
+        "name": "S12",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "the table still spans A1:H3 although a column is gone; Excel will repair the file: 'A1:H3'",
+        "name": "S13",
+        "status": "failed"
+      },
+      {
+        "duration": 3,
+        "message": "the banner still merges A6:H6 although a column is gone: ['A6:H6']",
+        "name": "S14",
+        "status": "failed"
+      },
+      {
+        "duration": 3,
+        "message": "the conditional format that highlighted managers now highlights Bonus (column E): ['E2:E3']",
+        "name": "S15",
+        "status": "failed"
+      },
+      {
+        "duration": 3,
+        "message": "the Manager column was hidden in the original and is visible in the copy: hidden=['E']",
+        "name": "S16",
+        "status": "failed"
+      },
+      {
+        "duration": 3,
+        "message": "defined names still point at the removed sheet: ['NoteTotal']",
+        "name": "S17",
+        "status": "failed"
+      },
+      {
+        "duration": 2,
+        "message": "the array formula over the kept Manager column was lost or still reads column E: '=E2:E3'",
+        "name": "S19",
+        "status": "failed"
+      },
+      {
+        "duration": 235,
+        "message": "the file already at the destination was replaced",
+        "name": "S20",
+        "status": "failed"
+      },
+      {
+        "duration": 110,
+        "message": "the file behind the symlink at the destination was overwritten",
+        "name": "S21",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "S22",
+        "status": "passed"
+      },
+      {
+        "duration": 112,
+        "message": "copies were written into the originals folder: ['out/staff.xlsx']",
+        "name": "S23",
+        "status": "failed"
+      },
+      {
+        "duration": 10452,
+        "message": "a half-written copy was left at the destination the auditor collects from",
+        "name": "S24",
+        "status": "failed"
+      },
+      {
+        "duration": 125,
+        "message": "a spec whose list field is a string was applied and copies were written",
+        "name": "S25",
+        "status": "failed"
+      },
+      {
+        "duration": 146,
+        "message": "a spec with an unknown field was applied and copies were written",
+        "name": "S26",
+        "status": "failed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S27",
+        "status": "passed"
+      },
+      {
+        "duration": 203,
+        "message": "the good workbooks were not copied, so this is not a run that partly succeeded",
+        "name": "S28",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "the encrypted workbook that sorts first stopped the workbooks after it",
+        "name": "S29",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "the text file among the inputs stopped the run",
+        "name": "S30",
+        "status": "failed"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -403,9 +403,6 @@
+         spec = Spec(spec)
+     source = Path(source)
+     destination = Path(destination)
+-    if os.path.lexists(destination):
+-        raise RedactionRefused("a file is already at the destination")
+-
+     wb = load_workbook(str(source), keep_links=False)
+ 
+     # Sheets first.
+@@ -455,7 +452,7 @@
+     wb.properties.creator = spec.organisation
+     wb.properties.lastModifiedBy = spec.organisation
+ 
+-    _publish(wb, destination)
++    wb.save(str(destination))
+     return {
+         "workbook": source.name,
+         "status": "redacted" if (removed_sheets or columns_removed or marked) else "unchanged",

@@ -1,0 +1,13 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -445,6 +445,10 @@
+     # Everything that speaks in coordinates is rewritten before the cells move.
+     marked = 0
+     for ws in wb.worksheets:
++        for row in ws.iter_rows():
++            for cell in row:
++                if cell.data_type == "s" and isinstance(cell.value, str):
++                    cell.value = cell.value
+         marked += _rewrite_cells(ws, rewriter, spec.marker)
+         _rewrite_sheet_structures(ws, rewriter, maps[ws.title])
+     for ws in wb.worksheets:

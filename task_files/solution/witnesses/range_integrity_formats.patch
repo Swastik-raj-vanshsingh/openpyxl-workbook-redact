@@ -1,0 +1,18 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -335,7 +335,6 @@
+             except Rewriter.Dependent:
+                 continue
+             rebuilt.add(" ".join(ranges), rule)
+-    ws.conditional_formatting = rebuilt
+     # data validations
+     kept = []
+     for dv in ws.data_validations.dataValidation:
+@@ -351,7 +350,6 @@
+             continue
+         dv.sqref = " ".join(ranges)
+         kept.append(dv)
+-    ws.data_validations.dataValidation = kept
+     # column widths and hidden flags move with their columns
+     dims = {}
+     for letter, dim in list(ws.column_dimensions.items()):

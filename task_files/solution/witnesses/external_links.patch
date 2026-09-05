@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -406,7 +406,7 @@
+     if os.path.lexists(destination):
+         raise RedactionRefused("a file is already at the destination")
+ 
+-    wb = load_workbook(str(source), keep_links=False)
++    wb = load_workbook(str(source))
+ 
+     # Sheets first.
+     removed_sheets: set[str] = set()

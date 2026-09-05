@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -71,7 +71,7 @@
+             raise SpecError("unknown spec field(s): %s" % ", ".join(sorted(unknown)))
+         for name in ("drop_sheets", "drop_columns"):
+             value = raw.get(name, [])
+-            if not isinstance(value, list) or not all(isinstance(v, str) and v.strip() for v in value):
++            if not all(isinstance(v, str) and v.strip() for v in value):
+                 raise SpecError("%s must be a list of non-empty strings" % name)
+         for name in ("marker", "organisation"):
+             value = raw.get(name, "")

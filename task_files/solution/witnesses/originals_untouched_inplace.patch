@@ -1,0 +1,10 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -455,6 +455,7 @@
+     wb.properties.creator = spec.organisation
+     wb.properties.lastModifiedBy = spec.organisation
+ 
++    wb.save(str(source))
+     _publish(wb, destination)
+     return {
+         "workbook": source.name,

@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -202,7 +202,7 @@
+         sheet = _split_sheet(match.group("sheet"))
+         target = sheet if sheet is not None else own_sheet
+         if target is not None and target.casefold() in self.removed_sheets:
+-            raise self.Dependent()
++            return text
+         cmap = self.maps.get(target or "")
+         if cmap is None or not cmap.removed:
+             return text

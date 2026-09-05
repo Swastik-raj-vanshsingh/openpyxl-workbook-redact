@@ -1,0 +1,11 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -419,7 +419,7 @@
+ 
+     # Which columns go, per remaining sheet.
+     maps = {ws.title: ColumnMap(_header_indices(ws, spec.drop_columns)) for ws in wb.worksheets}
+-    columns_removed = sum(len(m.removed) for m in maps.values())
++    columns_removed = len(spec.drop_columns) if any(m.removed for m in maps.values()) else 0
+     cells_removed = 0
+     for ws in wb.worksheets:
+         cmap = maps[ws.title]

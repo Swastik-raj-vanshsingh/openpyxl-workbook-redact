@@ -1,0 +1,255 @@
+{
+  "reportFormat": "CTRF",
+  "results": {
+    "summary": {
+      "failed": 0,
+      "other": 0,
+      "passed": 40,
+      "pending": 0,
+      "skipped": 0,
+      "tests": 40
+    },
+    "tests": [
+      {
+        "duration": 216,
+        "message": "requirement satisfied",
+        "name": "U1",
+        "status": "passed"
+      },
+      {
+        "duration": 539,
+        "message": "requirement satisfied",
+        "name": "U2",
+        "status": "passed"
+      },
+      {
+        "duration": 151,
+        "message": "requirement satisfied",
+        "name": "U3",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "U4",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "U5",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "U6",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "U7",
+        "status": "passed"
+      },
+      {
+        "duration": 125,
+        "message": "requirement satisfied",
+        "name": "U8",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "U9",
+        "status": "passed"
+      },
+      {
+        "duration": 828,
+        "message": "requirement satisfied",
+        "name": "U10",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "U11",
+        "status": "passed"
+      },
+      {
+        "duration": 139,
+        "message": "requirement satisfied",
+        "name": "S1",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S2",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S3",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S4",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S5",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "S6",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S7",
+        "status": "passed"
+      },
+      {
+        "duration": 164,
+        "message": "requirement satisfied",
+        "name": "S8",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S9",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S10",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S11",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S12",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S13",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S14",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S15",
+        "status": "passed"
+      },
+      {
+        "duration": 4,
+        "message": "requirement satisfied",
+        "name": "S16",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S17",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S19",
+        "status": "passed"
+      },
+      {
+        "duration": 251,
+        "message": "requirement satisfied",
+        "name": "S20",
+        "status": "passed"
+      },
+      {
+        "duration": 107,
+        "message": "requirement satisfied",
+        "name": "S21",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "S22",
+        "status": "passed"
+      },
+      {
+        "duration": 112,
+        "message": "requirement satisfied",
+        "name": "S23",
+        "status": "passed"
+      },
+      {
+        "duration": 20211,
+        "message": "requirement satisfied",
+        "name": "S24",
+        "status": "passed"
+      },
+      {
+        "duration": 130,
+        "message": "requirement satisfied",
+        "name": "S25",
+        "status": "passed"
+      },
+      {
+        "duration": 129,
+        "message": "requirement satisfied",
+        "name": "S26",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S27",
+        "status": "passed"
+      },
+      {
+        "duration": 143,
+        "message": "requirement satisfied",
+        "name": "S28",
+        "status": "passed"
+      },
+      {
+        "duration": 3,
+        "message": "requirement satisfied",
+        "name": "S29",
+        "status": "passed"
+      },
+      {
+        "duration": 2,
+        "message": "requirement satisfied",
+        "name": "S30",
+        "status": "passed"
+      }
+    ]
+  }
+}

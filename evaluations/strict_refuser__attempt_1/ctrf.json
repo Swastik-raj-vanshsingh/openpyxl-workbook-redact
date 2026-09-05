@@ -1,0 +1,255 @@
+{
+  "reportFormat": "CTRF",
+  "results": {
+    "summary": {
+      "failed": 8,
+      "other": 0,
+      "passed": 3,
+      "pending": 0,
+      "skipped": 29,
+      "tests": 40
+    },
+    "tests": [
+      {
+        "duration": 128,
+        "message": "requirement satisfied",
+        "name": "U1",
+        "status": "passed"
+      },
+      {
+        "duration": 199,
+        "message": "the command failed on a folder with nothing wrong in it",
+        "name": "U2",
+        "status": "failed"
+      },
+      {
+        "duration": 146,
+        "message": "no readable copy of staff.xlsx",
+        "name": "U3",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "no readable copy of staff.xlsx",
+        "name": "U4",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "no readable copy of staff.xlsx",
+        "name": "U5",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "requirement satisfied",
+        "name": "U6",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "the summary counts do not match the run: {'redacted': 0, 'unchanged': 0, 'failed': 2}",
+        "name": "U7",
+        "status": "failed"
+      },
+      {
+        "duration": 115,
+        "message": "redact_workbook raised or is missing",
+        "name": "U8",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "no readable copy of staff.xlsx",
+        "name": "U9",
+        "status": "failed"
+      },
+      {
+        "duration": 661,
+        "message": "requirement satisfied",
+        "name": "U10",
+        "status": "passed"
+      },
+      {
+        "duration": 1,
+        "message": "no readable copy of plain.xlsx",
+        "name": "U11",
+        "status": "failed"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S1",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S2",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S3",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S4",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S5",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S6",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S7",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S8",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S9",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S10",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S11",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S12",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S13",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S14",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S15",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S16",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S17",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S19",
+        "status": "skipped"
+      },
+      {
+        "duration": 106,
+        "message": "utility incomplete; safety not measured",
+        "name": "S20",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S21",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S22",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S23",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S24",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S25",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S26",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S27",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S28",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S29",
+        "status": "skipped"
+      },
+      {
+        "duration": 1,
+        "message": "utility incomplete; safety not measured",
+        "name": "S30",
+        "status": "skipped"
+      }
+    ]
+  }
+}

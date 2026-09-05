@@ -1,0 +1,586 @@
+diff --git a/openpyxl/redact.py b/openpyxl/redact.py
+new file mode 100644
+index 0000000..e65a33a
+--- /dev/null
++++ b/openpyxl/redact.py
+@@ -0,0 +1,580 @@
++# Copyright (c) 2010-2024 openpyxl
++
++"""Produce a copy of a workbook with named sheets and columns removed.
++
++``python -m openpyxl.redact INPUT_DIR OUTPUT_DIR --spec SPEC.json --report REPORT.csv``
++
++Removing a column moves everything to its right. ``Worksheet.delete_cols``
++moves the cells and nothing else: formulas in other cells, defined names,
++tables, merged ranges, validations and conditional formats keep the letters
++they had, so they quietly start describing different data. This module
++rewrites every one of those in terms of the new layout before the columns go,
++and replaces anything that depended on removed data with the marker.
++
++A workbook carries more than its cells. Pivot caches hold copies of the rows
++they summarise, external links hold paths to other files, and the document
++properties hold the author's name; the copy carries none of them.
++"""
++
++from __future__ import annotations
++
++import argparse
++import copy
++import csv
++import json
++import os
++import re
++import sys
++from pathlib import Path
++from typing import Any, Iterable
++
++from openpyxl import load_workbook
++from openpyxl.formula import Tokenizer
++from openpyxl.formula.tokenizer import Token
++from openpyxl.utils.cell import (
++    column_index_from_string,
++    get_column_letter,
++    range_boundaries,
++)
++from openpyxl.worksheet.cell_range import CellRange
++from openpyxl.worksheet.formula import ArrayFormula
++from openpyxl.formatting.formatting import ConditionalFormattingList
++
++SPEC_FIELDS = {"drop_sheets", "drop_columns", "marker", "organisation"}
++REPORT_HEADER = ("workbook", "status", "sheets_removed", "columns_removed",
++                 "cells_removed", "detail")
++
++
++class SpecError(ValueError):
++    """The spec is not shaped as documented."""
++
++
++class RedactionRefused(Exception):
++    """This workbook cannot be released as a redacted copy."""
++
++
++# --------------------------------------------------------------------------
++# The spec
++# --------------------------------------------------------------------------
++
++
++def _normalise(header: Any) -> str:
++    return "" if header is None else str(header).strip().casefold()
++
++
++class Spec:
++    def __init__(self, raw: Any) -> None:
++        if not isinstance(raw, dict):
++            raise SpecError("the spec must be a JSON object")
++        unknown = set(raw) - SPEC_FIELDS
++        if unknown:
++            raise SpecError("unknown spec field(s): %s" % ", ".join(sorted(unknown)))
++        for name in ("drop_sheets", "drop_columns"):
++            value = raw.get(name, [])
++            if not isinstance(value, list) or not all(isinstance(v, str) and v.strip() for v in value):
++                raise SpecError("%s must be a list of non-empty strings" % name)
++        for name in ("marker", "organisation"):
++            value = raw.get(name, "")
++            if not isinstance(value, str):
++                raise SpecError("%s must be a string" % name)
++        self.drop_sheets = [s for s in raw.get("drop_sheets", [])]
++        self.drop_columns = {_normalise(c) for c in raw.get("drop_columns", [])}
++        self.marker = raw.get("marker") or "#REDACTED"
++        self.organisation = raw.get("organisation") or ""
++
++    @classmethod
++    def load(cls, path: str) -> "Spec":
++        try:
++            with open(path, "r", encoding="utf-8") as handle:
++                return cls(json.load(handle))
++        except (OSError, json.JSONDecodeError) as exc:
++            raise SpecError("cannot read spec %s: %s" % (path, exc)) from exc
++
++
++# --------------------------------------------------------------------------
++# Column maps: what moves where once the removed columns are gone
++# --------------------------------------------------------------------------
++
++
++class ColumnMap:
++    """For one sheet, which original columns are removed and where the rest land."""
++
++    def __init__(self, removed: Iterable[int]) -> None:
++        self.removed = sorted(set(removed))
++        self._removed = set(self.removed)
++
++    def is_removed(self, index: int) -> bool:
++        return index in self._removed
++
++    def shift(self, index: int) -> int:
++        """New index of an original column that survives."""
++        return index - sum(1 for r in self.removed if r < index)
++
++    def shift_range(self, min_col: int, max_col: int) -> tuple[int, int] | None:
++        """New bounds of an original column span, or None if nothing survives."""
++        kept = [c for c in range(min_col, max_col + 1) if c not in self._removed]
++        if not kept:
++            return None
++        return self.shift(kept[0]), self.shift(kept[-1])
++
++    def touches(self, min_col: int, max_col: int) -> bool:
++        return any(min_col <= r <= max_col for r in self.removed)
++
++
++_REF = re.compile(
++    r"^(?P<sheet>(?:'(?:[^']|'')*'|[^'!\[\]]+)!)?"
++    r"(?P<a>\$?[A-Za-z]{1,3}\$?\d+|\$?[A-Za-z]{1,3}|\$?\d+)"
++    r"(?::(?P<b>\$?[A-Za-z]{1,3}\$?\d+|\$?[A-Za-z]{1,3}|\$?\d+))?$"
++)
++_CELL = re.compile(r"^(\$?)([A-Za-z]{1,3})(\$?)(\d+)$")
++_COL = re.compile(r"^(\$?)([A-Za-z]{1,3})$")
++
++
++def _split_sheet(prefix: str | None) -> str | None:
++    if not prefix:
++        return None
++    name = prefix[:-1]
++    if name.startswith("'") and name.endswith("'"):
++        name = name[1:-1].replace("''", "'")
++    return name
++
++
++class Rewriter:
++    """Rewrites references for the new layout, or says a reference is dependent."""
++
++    def __init__(self, maps: dict[str, ColumnMap], removed_sheets: set[str],
++                 dropped_names: set[str]) -> None:
++        self.maps = maps
++        self.removed_sheets = {s.casefold() for s in removed_sheets}
++        self.dropped_names = {n.casefold() for n in dropped_names}
++
++    class Dependent(Exception):
++        pass
++
++    def _part(self, text: str, cmap: ColumnMap, start: bool, other: str | None) -> str:
++        cell = _CELL.match(text)
++        if cell:
++            dollar_c, letters, dollar_r, row = cell.groups()
++            index = column_index_from_string(letters.upper())
++            if cmap.is_removed(index):
++                raise self.Dependent()
++            return "%s%s%s%s" % (dollar_c, get_column_letter(cmap.shift(index)), dollar_r, row)
++        col = _COL.match(text)
++        if col:
++            dollar_c, letters = col.groups()
++            index = column_index_from_string(letters.upper())
++            if cmap.is_removed(index):
++                raise self.Dependent()
++            return "%s%s" % (dollar_c, get_column_letter(cmap.shift(index)))
++        return text  # a row reference: unaffected by column removal
++
++    def _range(self, a: str, b: str, cmap: ColumnMap) -> str:
++        """A two-ended reference: shrink around removed columns, or give up."""
++        ca, cb = _CELL.match(a) or _COL.match(a), _CELL.match(b) or _COL.match(b)
++        if not ca or not cb:
++            return "%s:%s" % (self._part(a, cmap, True, b), self._part(b, cmap, False, a))
++        ia = column_index_from_string(ca.group(2).upper())
++        ib = column_index_from_string(cb.group(2).upper())
++        lo, hi = min(ia, ib), max(ia, ib)
++        span = cmap.shift_range(lo, hi)
++        if span is None:
++            raise self.Dependent()
++        new_lo, new_hi = span
++
++        def rebuild(match: re.Match, new_index: int) -> str:
++            groups = match.groups()
++            if len(groups) == 4:
++                return "%s%s%s%s" % (groups[0], get_column_letter(new_index), groups[2], groups[3])
++            return "%s%s" % (groups[0], get_column_letter(new_index))
++
++        first, second = (new_lo, new_hi) if ia <= ib else (new_hi, new_lo)
++        return "%s:%s" % (rebuild(ca, first), rebuild(cb, second))
++
++    def reference(self, text: str, own_sheet: str) -> str:
++        """Rewrite one reference token; raise Dependent if it used removed data."""
++        if text.startswith("[") or "![" in text or "[" in text.split("!")[0]:
++            raise self.Dependent()  # external workbook
++        match = _REF.match(text)
++        if not match:
++            if text.casefold() in self.dropped_names:
++                raise self.Dependent()
++            return text  # a defined name or something we do not touch
++        sheet = _split_sheet(match.group("sheet"))
++        target = sheet if sheet is not None else own_sheet
++        if target is not None and target.casefold() in self.removed_sheets:
++            raise self.Dependent()
++        cmap = self.maps.get(target or "")
++        if cmap is None or not cmap.removed:
++            return text
++        a, b = match.group("a"), match.group("b")
++        prefix = match.group("sheet") or ""
++        if b is None:
++            return prefix + self._part(a, cmap, True, None)
++        return prefix + self._range(a, b, cmap)
++
++    def formula(self, formula: str, own_sheet: str) -> str:
++        """Rewrite a whole formula; raise Dependent if any reference used removed data."""
++        text = formula if formula.startswith("=") else "=" + formula
++        tokenizer = Tokenizer(text)
++        out = []
++        for token in tokenizer.items:
++            if token.type == Token.OPERAND and token.subtype == Token.RANGE:
++                out.append(self.reference(token.value, own_sheet))
++            else:
++                out.append(token.value)
++        rebuilt = "=" + "".join(out)
++        return rebuilt if formula.startswith("=") else rebuilt[1:]
++
++    def sqref(self, ranges: Iterable[str], sheet: str) -> list[str]:
++        """Shift a list of cell ranges on one sheet; drop those wholly removed."""
++        cmap = self.maps.get(sheet)
++        kept = []
++        for text in ranges:
++            if cmap is None or not cmap.removed:
++                kept.append(str(text))
++                continue
++            min_col, min_row, max_col, max_row = range_boundaries(str(text))
++            span = cmap.shift_range(min_col, max_col)
++            if span is None:
++                continue
++            kept.append(str(CellRange(min_col=span[0], min_row=min_row,
++                                      max_col=span[1], max_row=max_row)))
++        return kept
++
++
++# --------------------------------------------------------------------------
++# One workbook
++# --------------------------------------------------------------------------
++
++
++def _header_indices(ws, wanted: set[str]) -> list[int]:
++    found = []
++    for cell in ws[1]:
++        if _normalise(cell.value) in wanted and cell.value is not None:
++            found.append(cell.column)
++    return found
++
++
++def _mark(cell, marker: str) -> None:
++    cell.value = marker
++    cell.data_type = "s"
++
++
++def _rewrite_cells(ws, rewriter: Rewriter, marker: str) -> int:
++    marked = 0
++    for row in ws.iter_rows():
++        for cell in row:
++            value = cell.value
++            if isinstance(value, ArrayFormula):
++                try:
++                    text = rewriter.formula(value.text or "", ws.title)
++                    ref = rewriter.sqref([value.ref], ws.title) if value.ref else []
++                    if value.ref and not ref:
++                        raise Rewriter.Dependent()
++                    value.text = text
++                    if ref:
++                        value.ref = ref[0]
++                except Rewriter.Dependent:
++                    _mark(cell, marker)
++                    marked += 1
++            elif cell.data_type == "f" and isinstance(value, str):
++                try:
++                    cell.value = rewriter.formula(value, ws.title)
++                except Rewriter.Dependent:
++                    _mark(cell, marker)
++                    marked += 1
++    return marked
++
++
++def _rewrite_defined_names(container, rewriter: Rewriter, own_sheet: str | None) -> None:
++    for name in list(container.keys()):
++        dn = container[name]
++        try:
++            dn.attr_text = rewriter.formula(dn.attr_text or "", own_sheet or "")
++            if not dn.attr_text or dn.attr_text == "=":
++                raise Rewriter.Dependent()
++        except Rewriter.Dependent:
++            del container[name]
++
++
++def _rewrite_sheet_structures(ws, rewriter: Rewriter, cmap: ColumnMap) -> None:
++    title = ws.title
++    # merged ranges
++    for merged in list(ws.merged_cells.ranges):
++        new = rewriter.sqref([merged.coord], title)
++        ws.merged_cells.remove(merged)
++        if new:
++            ws.merged_cells.add(CellRange(new[0]))
++    # tables
++    for name in list(ws.tables.keys()):
++        table = ws.tables[name]
++        min_col, min_row, max_col, max_row = range_boundaries(table.ref)
++        span = cmap.shift_range(min_col, max_col)
++        if span is None:
++            del ws.tables[name]
++            continue
++        kept_columns = [tc for index, tc in enumerate(table.tableColumns, start=min_col)
++                        if not cmap.is_removed(index)]
++        table.tableColumns = kept_columns
++        table.ref = str(CellRange(min_col=span[0], min_row=min_row, max_col=span[1], max_row=max_row))
++        if table.autoFilter is not None:
++            table.autoFilter.ref = table.ref
++    # sheet filter
++    if ws.auto_filter.ref:
++        new = rewriter.sqref([ws.auto_filter.ref], title)
++        ws.auto_filter.ref = new[0] if new else None
++    # conditional formatting
++    rebuilt = ConditionalFormattingList()
++    for cf in ws.conditional_formatting:
++        ranges = rewriter.sqref([str(r) for r in cf.sqref.ranges], title)
++        if not ranges:
++            continue
++        for rule in cf.rules:
++            try:
++                rule.formula = [rewriter.formula(f, title) for f in (rule.formula or [])]
++            except Rewriter.Dependent:
++                continue
++            rebuilt.add(" ".join(ranges), rule)
++    ws.conditional_formatting = rebuilt
++    # data validations
++    kept = []
++    for dv in ws.data_validations.dataValidation:
++        ranges = rewriter.sqref([str(r) for r in dv.sqref.ranges], title)
++        if not ranges:
++            continue
++        try:
++            for attr in ("formula1", "formula2"):
++                value = getattr(dv, attr)
++                if value:
++                    setattr(dv, attr, rewriter.formula(value, title))
++        except Rewriter.Dependent:
++            continue
++        dv.sqref = " ".join(ranges)
++        kept.append(dv)
++    ws.data_validations.dataValidation = kept
++    # column widths and hidden flags move with their columns
++    dims = {}
++    for letter, dim in list(ws.column_dimensions.items()):
++        try:
++            index = column_index_from_string(letter)
++        except ValueError:
++            continue
++        if cmap.is_removed(index):
++            continue
++        new_index = cmap.shift(index)
++        moved = copy.copy(dim)
++        moved.index = get_column_letter(new_index)
++        moved.min = moved.max = new_index
++        dims[moved.index] = moved
++    ws.column_dimensions.clear()
++    for letter, dim in dims.items():
++        ws.column_dimensions[letter] = dim
++    # pivot tables whose source touched removed data carry copies of it in
++    # their cache and show it in their rendered cells; both go.
++    for pivot in list(ws._pivots):
++        source = pivot.cache.cacheSource.worksheetSource if pivot.cache and pivot.cache.cacheSource else None
++        affected = source is None or source.ref is None
++        if not affected:
++            src_sheet = source.sheet or title
++            src_map = rewriter.maps.get(src_sheet)
++            if src_sheet.casefold() in rewriter.removed_sheets:
++                affected = True
++            else:
++                min_col, _, max_col, _ = range_boundaries(source.ref)
++                affected = src_map is not None and src_map.touches(min_col, max_col)
++        if affected:
++            location = getattr(getattr(pivot, "location", None), "ref", None)
++            if location:
++                for row in ws[location]:
++                    for cell in row:
++                        cell.value = None
++            ws._pivots.remove(pivot)
++
++
++def redact_workbook(source: str | os.PathLike, destination: str | os.PathLike,
++                    spec: Spec | dict) -> dict[str, Any]:
++    """Write a redacted copy of ``source`` at ``destination``.
++
++    Returns the report row for the workbook. Raises ``RedactionRefused`` when the
++    copy must not be written, and lets the library's own errors through when the
++    source cannot be read.
++    """
++    if not isinstance(spec, Spec):
++        spec = Spec(spec)
++    source = Path(source)
++    destination = Path(destination)
++    if os.path.lexists(destination):
++        raise RedactionRefused("a file is already at the destination")
++
++    wb = load_workbook(str(source), keep_links=False)
++
++    # Sheets first.
++    removed_sheets: set[str] = set()
++    for title in list(wb.sheetnames):
++        if title in spec.drop_sheets:
++            wb.remove(wb[title])
++            removed_sheets.add(title)
++    if not wb.worksheets:
++        raise RedactionRefused("every sheet of the workbook was removed")
++
++    # Which columns go, per remaining sheet.
++    maps = {ws.title: ColumnMap(_header_indices(ws, spec.drop_columns)) for ws in wb.worksheets}
++    columns_removed = sum(len(m.removed) for m in maps.values())
++    cells_removed = 0
++    for ws in wb.worksheets:
++        cmap = maps[ws.title]
++        if cmap.removed:
++            for row in ws.iter_rows():
++                for cell in row:
++                    if cmap.is_removed(cell.column) and cell.value is not None:
++                        cells_removed += 1
++
++    # Defined names that pointed at removed data go; the rest are rewritten.
++    probe = Rewriter(maps, removed_sheets, set())
++    dropped_names: set[str] = set()
++    for name in list(wb.defined_names.keys()):
++        try:
++            probe.formula(wb.defined_names[name].attr_text or "", "")
++        except Rewriter.Dependent:
++            dropped_names.add(name)
++    rewriter = Rewriter(maps, removed_sheets, dropped_names)
++    _rewrite_defined_names(wb.defined_names, rewriter, None)
++    for ws in wb.worksheets:
++        _rewrite_defined_names(ws.defined_names, rewriter, ws.title)
++
++    # Everything that speaks in coordinates is rewritten before the cells move.
++    marked = 0
++    for ws in wb.worksheets:
++        marked += _rewrite_cells(ws, rewriter, spec.marker)
++        _rewrite_sheet_structures(ws, rewriter, maps[ws.title])
++    for ws in wb.worksheets:
++        for index in reversed(maps[ws.title].removed):
++            ws.delete_cols(index)
++
++    # The workbook's own record of who made it.
++    wb.properties.creator = spec.organisation
++    wb.properties.lastModifiedBy = spec.organisation
++
++    _publish(wb, destination)
++    return {
++        "workbook": source.name,
++        "status": "redacted" if (removed_sheets or columns_removed or marked) else "unchanged",
++        "sheets_removed": len(removed_sheets),
++        "columns_removed": columns_removed,
++        "cells_removed": cells_removed,
++        "detail": "%d dependent formula(s) marked" % marked if marked else "",
++    }
++
++
++def _publish(wb, destination: Path) -> None:
++    """Write next to the destination, then claim the name without replacing anything."""
++    temporary = destination.with_name(".%s.part" % destination.name)
++    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
++    fd = os.open(str(temporary), flags, 0o644)
++    try:
++        with os.fdopen(fd, "wb") as handle:
++            wb.save(handle)
++        if os.path.lexists(destination):
++            raise RedactionRefused("a file is already at the destination")
++        os.link(str(temporary), str(destination), follow_symlinks=False)
++    except FileExistsError as exc:
++        raise RedactionRefused("a file is already at the destination") from exc
++    finally:
++        try:
++            os.unlink(str(temporary))
++        except OSError:
++            pass
++
++
++# --------------------------------------------------------------------------
++# The run
++# --------------------------------------------------------------------------
++
++
++def _csv_safe(value: Any) -> str:
++    text = "" if value is None else str(value)
++    if text[:1] in ("=", "+", "-", "@", "\t", "\r"):
++        return "'" + text
++    return text
++
++
++def _is_workbook_candidate(path: Path) -> bool:
++    return path.is_file() and path.suffix.lower() == ".xlsx"
++
++
++def run(input_dir: str, output_dir: str, spec_path: str, report_path: str) -> int:
++    source_root = Path(input_dir).resolve()
++    target_root = Path(output_dir).resolve()
++    report = Path(report_path).resolve()
++    if not source_root.is_dir():
++        print("input directory does not exist: %s" % source_root, file=sys.stderr)
++        return 2
++    if target_root == source_root or source_root in target_root.parents:
++        print("the output directory must not be inside the input directory", file=sys.stderr)
++        return 2
++    try:
++        spec = Spec.load(spec_path)
++    except SpecError as exc:
++        print("spec refused: %s" % exc, file=sys.stderr)
++        return 2
++    target_root.mkdir(parents=True, exist_ok=True)
++
++    rows = []
++    redacted = unchanged = failed = 0
++    for path in sorted(p for p in source_root.iterdir() if p.is_file()):
++        if not _is_workbook_candidate(path):
++            failed += 1
++            rows.append({"workbook": path.name, "status": "failed", "sheets_removed": 0,
++                         "columns_removed": 0, "cells_removed": 0,
++                         "detail": "not a workbook this library can open"})
++            print("failed %s: not a workbook" % path.name, file=sys.stderr)
++            continue
++        try:
++            row = redact_workbook(path, target_root / path.name, spec)
++        except RedactionRefused as why:
++            failed += 1
++            rows.append({"workbook": path.name, "status": "failed", "sheets_removed": 0,
++                         "columns_removed": 0, "cells_removed": 0, "detail": str(why)})
++            print("failed %s: %s" % (path.name, why), file=sys.stderr)
++            continue
++        except Exception as why:  # one workbook must not stop the others
++            failed += 1
++            rows.append({"workbook": path.name, "status": "failed", "sheets_removed": 0,
++                         "columns_removed": 0, "cells_removed": 0,
++                         "detail": "%s: %s" % (type(why).__name__, str(why)[:120])})
++            print("failed %s: %s: %s" % (path.name, type(why).__name__, str(why)[:120]),
++                  file=sys.stderr)
++            continue
++        rows.append(row)
++        if row["status"] == "redacted":
++            redacted += 1
++        else:
++            unchanged += 1
++
++    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
++    fd = os.open(str(report), flags, 0o600)
++    with os.fdopen(fd, "w", newline="", encoding="utf-8") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(REPORT_HEADER)
++        for row in rows:
++            writer.writerow([_csv_safe(row[key]) for key in REPORT_HEADER])
++
++    print("redacted %d, unchanged %d, failed %d" % (redacted, unchanged, failed))
++    return 1 if failed else 0
++
++
++def main(argv: list[str] | None = None) -> int:
++    parser = argparse.ArgumentParser(
++        prog="python -m openpyxl.redact",
++        description="Write redacted copies of every workbook in a folder.",
++    )
++    parser.add_argument("input_dir")
++    parser.add_argument("output_dir")
++    parser.add_argument("--spec", required=True, help="JSON spec: drop_sheets, drop_columns, marker, organisation")
++    parser.add_argument("--report", required=True, help="CSV report for the run")
++    args = parser.parse_args(argv)
++    return run(args.input_dir, args.output_dir, args.spec, args.report)
++
++
++if __name__ == "__main__":
++    sys.exit(main())

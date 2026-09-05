@@ -1,0 +1,12 @@
+--- a/openpyxl/redact.py
++++ b/openpyxl/redact.py
+@@ -445,7 +445,8 @@
+     # Everything that speaks in coordinates is rewritten before the cells move.
+     marked = 0
+     for ws in wb.worksheets:
+-        marked += _rewrite_cells(ws, rewriter, spec.marker)
++        if maps[ws.title].removed:
++            marked += _rewrite_cells(ws, rewriter, spec.marker)
+         _rewrite_sheet_structures(ws, rewriter, maps[ws.title])
+     for ws in wb.worksheets:
+         for index in reversed(maps[ws.title].removed):
